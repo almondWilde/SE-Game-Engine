@@ -1,4 +1,4 @@
-# SE-Game-Engine
+# SE-Game-Launcher
 5 games 
 like Hangman, Poker, Snake, and Tic Tac Toe.
 provide GUI support as well as bots to play against, if it applies
