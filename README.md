@@ -1,8 +1,8 @@
 # SE-Game-Launcher
-5 games
+5 games, ike Hangman, Poker, Snake, and Tic Tac Toe
 
-like Hangman, Poker, Snake, and Tic Tac Toe.
-provide GUI support as well as bots to play against, if it applies
+provide GUI support as well and bots to play against, if it applies
+
 different difficulty levels or scoring systems
 a greater main menu that would allow the user to select the game they would like to play
 
