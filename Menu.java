@@ -6,8 +6,28 @@ public class Menu{
 	
 	public static void displayMenu()
 	{
-		//list games
-		System.out.printf("Choose a game: \n1. Tic Tac Toe\n2.rock paper scissors");
+		int game_to_launch = -1;
+
+		while (game_to_launch == -1)
+		{
+			//list games
+			Object[] game_titles = {"TicTacToe", "Black Jack", "Snake", "Hangman", "Rock, Paper, Scissors", "Poker", "Minesweeper", "Bingo"};
+			game_to_launch = JOptionPane.showOptionDialog(null, "What would you like to play?", "SE-Game-Launcher", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, game_titles, game_titles[0]);
+
+			if(game_to_launch == -1)
+			{
+				JOptionPane.showMessageDialog(null, "alert", "alert", JOptionPane.ERROR_MESSAGE); 
+			}
+			else
+			{
+				System.out.println("shoopadoop");
+				//JOptionPane.showMessageDialog.(null, "Valid game option bro", "good hob", JOptionPane.INFORMATION_MESSAGE);
+			}
+	}		
+		
+
+
+
 		/*	
 			-list games as file directories
 		*/
