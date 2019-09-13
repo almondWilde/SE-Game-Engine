@@ -20,8 +20,32 @@ public class Menu{
 			}
 			else
 			{
-				System.out.println("shoopadoop");
-				//JOptionPane.showMessageDialog.(null, "Valid game option bro", "good hob", JOptionPane.INFORMATION_MESSAGE);
+				switch(game_to_launch){
+					case 0:
+						//launch_ttt();
+						break;
+					case 1:
+						//launch_bj();
+						break;
+					case 2:
+						//launch_s();
+						break;
+					case 3:
+						//launch_h();
+						break;
+					case 4:
+						//launch_rps();
+						break;
+					case 5:
+						//launch_p();
+						break;
+					case 6:
+						//launch_m();
+						break;
+					case 7:
+						//launch_b();
+						break;
+				}
 			}
 	}		
 		
