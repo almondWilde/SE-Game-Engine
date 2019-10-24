@@ -62,7 +62,7 @@ public class EpsilonGameLauncher extends JFrame
 		pMain.setLayout(new GridLayout(1,6));
 		pMain.setBackground(Color.white);
 
-		BufferedImage image = ImageIO.read(new File("G3XzqRp.jpg"));
+		BufferedImage image = ImageIO.read(new File("backgroundtest.jpg"));
 		JLabel label = new JLabel( new ImageIcon(image));
 		pCenter.add(label);
 		pCenter.setBackground(Color.black);
