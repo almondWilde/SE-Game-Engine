@@ -1,3 +1,13 @@
+/**
+	Project: Epsilon Game Launcher
+
+	This program crewates a window for the Epsilon Game Launcher,
+	 the main menu, center gaming area, and top menu bar
+
+	@author Armand Wilson
+	Last Edit: 10/24/19
+**/
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
@@ -12,7 +22,7 @@ public class EpsilonGameLauncher extends JFrame
 	private JMenuBar menuBar;
 	private JMenu NewGame_menu, Quit_menu, Help_menu;
 	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
-	private JPanel pMain, pSouth, pNorth, pCenter;
+	private JPanel PMainMenu, pSouth, pNorth, pCenter;
 
 	public EpsilonGameLauncher() throws IOException
 	{
@@ -25,12 +35,12 @@ public class EpsilonGameLauncher extends JFrame
 		menuBar.add(Quit_menu);
 		menuBar.add(Help_menu);
 
-		pMain = new JPanel();
+		PMainMenu = new JPanel();
 		pCenter = new JPanel();
 		pNorth = new JPanel();
 		pSouth = new JPanel();
 
-		//button intialization
+		//button intialization for each game
 		btnTicTacToe = new JButton("TicTacToe");
 		btnTicTacToe.setToolTipText("Play TicTacTie");
 
@@ -49,37 +59,44 @@ public class EpsilonGameLauncher extends JFrame
 		btnMinsweeper = new JButton("Minsweeper");
 		btnMinsweeper.setToolTipText("Play Minsweeper");
 
-		pMain.add(btnTicTacToe);
-		pMain.add(btnBingo);
-		pMain.add(btnThreeCardPoker);
-		pMain.add(btnBlackJack);
-		pMain.add(btnRockPaperScissors);
-		pMain.add(btnMinsweeper);		
+		//buttons are added to the main menu
+		PMainMenu.add(btnTicTacToe);
+		PMainMenu.add(btnBingo);
+		PMainMenu.add(btnThreeCardPoker);
+		PMainMenu.add(btnBlackJack);
+		PMainMenu.add(btnRockPaperScissors);
+		PMainMenu.add(btnMinsweeper);		
+		//set mainMenu appearance
+		PMainMenu.setLayout(new BoxLayout(PMainMenu,BoxLayout.X_AXIS));
+		PMainMenu.setBorder(BorderFactory.createTitledBorder("Games"));
+		PMainMenu.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+		PMainMenu.setLayout(new GridLayout(1,6));
+		PMainMenu.setBackground(Color.white);
 
-		pMain.setLayout(new BoxLayout(pMain,BoxLayout.X_AXIS));
-		pMain.setBorder(BorderFactory.createTitledBorder("Games"));
-		pMain.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-		pMain.setLayout(new GridLayout(1,6));
-		pMain.setBackground(Color.white);
-
+		//image background for Center panel
 		BufferedImage image = ImageIO.read(new File("backgroundtest.jpg"));
 		JLabel label = new JLabel( new ImageIcon(image));
 		pCenter.add(label);
 		pCenter.setBackground(Color.black);
 		pCenter.setLayout(new GridLayout(1,1));
 
+		//menuBar is placed at the top of the screen
 		pNorth.setBackground(Color.white);
 		pNorth.add(menuBar);
 
-		this.add(pMain,"South");
+		//add the panels onto the window
+		this.add(PMainMenu,"South");
 		this.add(pCenter,"Center");
 		this.add(pNorth,"North");
 
+		//window settings
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(screenSize.width / 2, screenSize.height / 2);
 		this.setResizable(true);
 		this.setLocation(40,0);
 		this.setTitle("Epsilon Game Launcher");
+		
+		//display menu
 		this.show();
 	}
 
