@@ -13,9 +13,11 @@ class Player{
 		Scanner scan = new Scanner(System.in);
 		boolean valid = false;
 
+
 		//not user
 		if(!this.isUser)
 		{
+			System.out.println("cpu flag");
 			Random rand = new Random();
 			int randint = rand.nextInt(2);
 
@@ -30,22 +32,28 @@ class Player{
 					this.weapon = "C";
 					break;
 			}
+
+			System.out.println("cpu weapon" + this.weapon);
 		}
+		else{
+			System.out.println("user flag");
+			//is user
+			String user_weapon = "";
+			do{
+				System.out.println("Choose your Weapon!\nA) Rock\nB) Paper\nC) Scissors\n\n");
+				weapon = scan.nextLine();
+				weapon.toUpperCase();
 
-		//is user
-		String user_weapon = "";
-		do{
-			System.out.println("Choose your Weapon!\nA) Rock\nB) Paper\nC) Scissors\n\n");
-			weapon = scan.nextLine();
-			weapon.toUpperCase();
-
-			valid = weapon.matches("[A-C,a-c]+");
-			if(!valid){
-				System.out.println("Invalid Weapon Choice! Choose another weapon..!\n\n");
+				valid = weapon.matches("[A-C,a-c]+");
+				if(!valid){
+					System.out.println("Invalid Weapon Choice! Choose another weapon..!\n\n");
+				}
 			}
+			while(!valid);
+			this.weapon = weapon;
 		}
-		while(!valid);
-		this.weapon = weapon;
+
+		
 	}
 	public String getWeapon() { return this.weapon; };
 	public boolean returnIsUser() { return this.isUser; }
@@ -55,8 +63,8 @@ public class RPS{
 	private static Player user, cpu;
 
 	public RPS(){
-		this.user = new Player(true);
-		this.cpu = new Player(false);
+		// this.user = new Player(true);
+		// this.cpu = new Player(false);
 	}
 
 	/*
@@ -107,12 +115,15 @@ public class RPS{
 				System.out.println( "Do you want to play again? [Y/N] ");
 				cont_response = cont_scanner.nextLine();
 				cont_response = cont_response.toUpperCase();
+
+				if(cont_response.equals("Y"))
+					cont_bool = true;
+				else if( cont_response.equals("N") )
+					cont_bool = false;
+
 			}while(!cont_response.equals("Y") && !cont_response.equals("N") );
 
-			if(cont_response.equals("Y") || cont_response.equals("y"))
-				cont_bool = true;
-			else if( cont_response.equals("N") || cont_response.equals("n") )
-				cont_bool = false;
+			
 		}while(cont_bool);
 
 
