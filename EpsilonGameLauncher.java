@@ -53,6 +53,7 @@ public class EpsilonGameLauncher extends JFrame
 	public JFrame mainWindow;
 	public EpsilonGameLauncher() throws IOException
 	{
+		//creates the window
 		mainWindow = new JFrame();
 		menuBar = new JMenuBar();
 		NewGame_menu = new JMenu("New Game");
@@ -66,7 +67,6 @@ public class EpsilonGameLauncher extends JFrame
 		pMainMenu = new JPanel();
 		pCenter = new JPanel();
 		pNorth = new JPanel();
-
 
 		//button intialization for each game
 		btnTicTacToe = new JButton("TicTacToe");
@@ -121,10 +121,12 @@ public class EpsilonGameLauncher extends JFrame
 
 		//window settings
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		mainWindow.setSize(screenSize.width / 2, screenSize.height / 2);
+		mainWindow.setSize((screenSize.height / 2) + 100, (screenSize.height / 2) + 100);
 		mainWindow.setResizable(true);
 		mainWindow.setLocation(screenSize.width / 4, screenSize.height / 4);
 		mainWindow.setTitle("Epsilon Game Launcher");
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		//display menu
 		mainWindow.show();
@@ -139,6 +141,8 @@ public class EpsilonGameLauncher extends JFrame
 			// in here is where the code goes in response to the click
 			if(e.getSource() == btnBingo) {		// Bingo Button!
 				System.out.println("BINGO");
+				bingoGame = new Bingo();
+				bingoGame.startBingo();
 			}
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
@@ -155,7 +159,6 @@ public class EpsilonGameLauncher extends JFrame
 				try{
 					mainWindow.setVisible(false);
 					RPS newRPS = new RPS(mainWindow, pCenter);
-					//newRPS.initialScreen(mainWindow);
 				}
 				catch(Exception IOException){
 					//failed to play a game

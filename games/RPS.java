@@ -76,6 +76,7 @@ class Player{
 		// }
 	}
 	public String getWeapon() { return this.weapon; }
+	public boolean getIsUser() { return isUser;}
 	public void setWeapon(String weapon) {this.weapon = weapon;}
 }
 
@@ -106,7 +107,7 @@ class InitialScreen extends JFrame{
 		optionsPanel.add(btnReturn);
 		optionsPanel.setBackground(Color.blue);
 		add(optionsPanel);
-		setLocation(screenSize.width / 5, screenSize.height / 5);
+		setLocation(screenSize.width / 3+100, screenSize.height / 3);
 	}
 
 	public class aButtonHandler implements ActionListener{
@@ -114,7 +115,10 @@ class InitialScreen extends JFrame{
 		{
 			if(e.getSource() == btnPlay){		// Bingo Button!
 				setVisible(false);
-				RPSPlayFrame playRPS = new RPSPlayFrame();
+				try{
+					RPSPlayFrame playRPS = new RPSPlayFrame();
+				}
+				catch(IOException ioe){}
 			}
 			else if(e.getSource() == btnReturn){
 				setVisible(false);
@@ -128,38 +132,30 @@ class RPSPlayFrame extends JFrame{
 	private JButton btnShoot;
 	private ButtonGroup userWeapons;
 	private JRadioButton btnRock, btnPaper, btnScissors;
-	private JPanel pWeaponsOptions, pRPSEast, pRPSCenter;
-	private BufferedImage userWeaponImage;
-	private JLabel userWeaponLabel;
-	private Hashtable<String, JLabel> weaponImages;
+	private JPanel pWeaponsOptions, pRPSEast, pRPSNorth, pRPSWest;
+	private BufferedImage userWeaponImage, cpuWeaponImage;
+	private JLabel userWeaponLabel, cpuWeaponLabel, vsLabel, victorLabel;
 	private String weaponOfChoice;
-	public JPanel pRPSWest;
+	public JPanel pRPSCenter;
 
-	public RPSPlayFrame(){
+	public RPSPlayFrame() throws IOException{
 		setBackground(Color.white);
-		weaponImages = new Hashtable<String, JLabel>();
+		victorLabel = new JLabel("Rock, Paper, Scisors!");
+		userWeaponLabel = new JLabel();
 		user = new Player(true);
 		cpu = new Player(false);
 		weaponOfChoice = "";
+		pRPSCenter= new JPanel();
+		pRPSNorth= new JPanel();
+		pWeaponsOptions = new JPanel();
 		pRPSWest = new JPanel();
-		pRPSWest.setLayout(new FlowLayout());
+		pRPSEast = new JPanel();
+		pRPSCenter.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		// try{
-		// 	userWeaponImage = ImageIO.read(new File("rock.jpeg"));
-		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-		// 	weaponImages.put("Rock", userWeaponLabel);
-		//
-		// 	userWeaponImage = ImageIO.read(new File("paper.png"));
-		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-		// 	weaponImages.put("Paper", userWeaponLabel);
-		//
-		// 	userWeaponImage = ImageIO.read(new File("scissors.png"));
-		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-		// 	weaponImages.put("Scissors", userWeaponLabel);
-		// }
-		// catch(Exception ioe){System.out.println("failed to load images");}
+		vsLabel = new JLabel("VS");
+		vsLabel.setFont(new Font("Serif", Font.PLAIN, 24));
+		cpuWeaponLabel = new JLabel();
 
-		userWeaponLabel = new JLabel();
 		btnShoot = new JButton("Shoot!");
 		btnRock = new JRadioButton("Rock");
 		btnPaper = new JRadioButton("Paper");
@@ -169,42 +165,115 @@ class RPSPlayFrame extends JFrame{
 		userWeapons.add(btnRock);
 		userWeapons.add(btnPaper);
 		userWeapons.add(btnScissors);
-
-		pWeaponsOptions = new JPanel();
 		pWeaponsOptions.setBorder(BorderFactory.createTitledBorder("Choose Your Weapon!"));
-//		pWeaponsOptions.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 		pWeaponsOptions.setLayout(new GridLayout(1,4));
 		pWeaponsOptions.add(btnRock);
 		pWeaponsOptions.add(btnPaper);
 		pWeaponsOptions.add(btnScissors);
 		pWeaponsOptions.add(btnShoot);
 
-		btnRock.addActionListener(new aButtonHandler(userWeaponLabel, user));
-		btnPaper.addActionListener(new aButtonHandler(userWeaponLabel, user));
-		btnShoot.addActionListener(new aButtonHandler(userWeaponLabel, user));
-		btnScissors.addActionListener(new aButtonHandler(userWeaponLabel, user));
+		btnRock.addActionListener(new aButtonHandler(userWeaponLabel, cpuWeaponLabel, user, cpu, victorLabel));
+		btnPaper.addActionListener(new aButtonHandler(userWeaponLabel, cpuWeaponLabel, user, cpu, victorLabel));
+		btnShoot.addActionListener(new aButtonHandler(userWeaponLabel, cpuWeaponLabel, user, cpu, victorLabel));
+		btnScissors.addActionListener(new aButtonHandler(userWeaponLabel, cpuWeaponLabel, user, cpu, victorLabel));
 
-		pRPSWest.add(userWeaponLabel);
-		add(pWeaponsOptions, "South");
+		pRPSCenter.add(userWeaponLabel);
+		pRPSCenter.add(vsLabel);
+		pRPSCenter.add(cpuWeaponLabel);
+
+		pRPSNorth.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pRPSNorth.add(victorLabel);
+
+		pRPSWest.add(new JLabel("Player1"));
+		pRPSEast.add(new JLabel("CPU"));
+
+		add(pRPSEast, "East");
 		add(pRPSWest, "West");
+		add(pRPSNorth, "North");
+		add(pWeaponsOptions, "South");
+		add(pRPSCenter, "Center");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(screenSize.width / 4, screenSize.height / 4);
-		setSize(screenSize.width / 2, screenSize.height / 2);
+		setSize((screenSize.height / 2)+100, screenSize.width / 2);
 		setResizable(true);
 		setTitle("Rock, Paper, Scissors!");
 
 		setVisible(true);
 
 	}
+	public String decideWinner(Player user, Player cpu)
+	{
+		String[] returnMessage = {"DRAW", "USER WINS", "CPU WINS", "ERROR TRY AGAIN"};
+		String uw = user.getWeapon(), cw = cpu.getWeapon();
 
+			if( uw.equals( cw ) )
+				return returnMessage[0];
+			else if( cw.equals("Rock") ){		//cpu has a rock
+				System.out.print(uw);
+				if(uw.equals("Paper"))		//user has paper; user wins
+					return returnMessage[1];
+				else if(uw.equals("Scissors"))		//user has scissors; user loses
+					return returnMessage[2];
+			}
+			else if( cw.equals("Paper") ){		//cpu has paper
+				System.out.print(uw);
+				if(uw.equals("Rock"))		//user has rock; user loses
+					return returnMessage[2];
+				else if(uw.equals("Scissors"))		//user has scissors; user wins
+					return returnMessage[1];
+			}
+			else if( cw.equals("Scissors") ){		//cpu has scissors
+				System.out.print(uw);
+				if(uw.equals("Rock"))		//user has rock; user wins
+					return returnMessage[1];
+				else if(uw.equals("Paper"))		//user has paper; user loses
+					return returnMessage[2];
+			}
+			System.out.println(cw);
+
+			return returnMessage[3];
+	}
+	public JLabel cpuChooseWeapon(Player cpu, JLabel cpuWeaponLabel) throws IOException{
+		if(!cpu.getIsUser()){
+				Random rand = new Random();
+				int randint = rand.nextInt(3);
+				switch( randint ){
+					case 0:
+						cpu.setWeapon("Rock");	//Rock
+						System.out.println("cpu selected rock");
+						cpuWeaponImage = ImageIO.read(new File("rock.jpeg"));
+						cpuWeaponLabel.setIcon( new ImageIcon(cpuWeaponImage));
+						cpuWeaponLabel.setText("Rock");
+						break;
+					case 1:
+						cpu.setWeapon("Paper");	//Paper
+						System.out.println("cpu selected paper");
+						cpuWeaponImage = ImageIO.read(new File("paper.jpeg"));
+						cpuWeaponLabel.setIcon( new ImageIcon(cpuWeaponImage));
+						cpuWeaponLabel.setText("Paper");
+						break;
+					case 2:
+						cpu.setWeapon("Scissors");	//Scissors
+						System.out.println("cpu selected scissors");
+						cpuWeaponImage = ImageIO.read(new File("scissors.jpeg"));
+						cpuWeaponLabel.setIcon( new ImageIcon(cpuWeaponImage));
+						cpuWeaponLabel.setText("Scissors");
+						break;
+				}
+		}
+		return cpuWeaponLabel;
+	}
 	public class aButtonHandler implements ActionListener{
-		private JLabel transferLabel;
-		private Player user;
+		private JLabel userWeaponLabel, cpuWeaponLabel, victorLabel;
+		private Player user, cpu;
 
-		aButtonHandler(JLabel transferLabel, Player user)
+		aButtonHandler(JLabel userWeaponLabel, JLabel cpuWeaponLabel, Player user, Player cpu, JLabel victorLabel)
 		{
-			this.transferLabel = transferLabel;
+			this.userWeaponLabel = userWeaponLabel;
+			this.cpuWeaponLabel = cpuWeaponLabel;
+			this.victorLabel = victorLabel;
 			this.user = user;
+			this.cpu = cpu;
 		}
 		public void actionPerformed(ActionEvent e)
 		{
@@ -213,10 +282,13 @@ class RPSPlayFrame extends JFrame{
 				if(btnRock.isSelected())
 				{
 					user.setWeapon("Rock");
-					System.out.println("rock");
+					userWeaponLabel.setText("Rock");
+					System.out.println("user selected rock");
+
 					try{
 						userWeaponImage = ImageIO.read(new File("rock.jpeg"));
-						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+						userWeaponLabel.setIcon( new ImageIcon(userWeaponImage));
+
 					}
 					catch(IOException ioe)
 					{
@@ -226,9 +298,12 @@ class RPSPlayFrame extends JFrame{
 				else if(btnPaper.isSelected())
 				{
 					user.setWeapon("Paper");
+					System.out.println("user selected paper");
+					userWeaponLabel.setText("nPaper");
+
 					try{
-						userWeaponImage = ImageIO.read(new File("paper.png"));
-						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+						userWeaponImage = ImageIO.read(new File("paper.jpeg"));
+						userWeaponLabel.setIcon( new ImageIcon(userWeaponImage));
 					}
 					catch(IOException ioe)
 					{
@@ -238,17 +313,29 @@ class RPSPlayFrame extends JFrame{
 				else if(btnScissors.isSelected())
 				{
 					user.setWeapon("Scissors");
+					System.out.println("user selected scissors");
+					userWeaponLabel.setText("Scissors");
+
 					try{
-						userWeaponImage = ImageIO.read(new File("scissors.png"));
-						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+						userWeaponImage = ImageIO.read(new File("scissors.jpeg"));
+						userWeaponLabel.setIcon( new ImageIcon(userWeaponImage));
+
 					}
 					catch(IOException ioe)
 					{
 						System.out.println("scissors image failed to load");
 					}
 				}
+				try{
+					cpuWeaponLabel = cpuChooseWeapon(cpu, cpuWeaponLabel);
+					cpu.setWeapon(cpuWeaponLabel.getText());
+				}
+				catch(IOException ioe){System.out.println(ioe);}
+
+				victorLabel.setText("Winner is: ");
+				victorLabel.setText( victorLabel.getText() + decideWinner(user, cpu));
+
 			}
-			//pRPSWest.add(weaponImages.get(weaponOfChoice));
 		}
 	}
 }
@@ -274,9 +361,6 @@ public class RPS{
 		//terminal game play
 		// cont_scanner = new Scanner(System.in);
 		// do{
-		// 	//set up radio buttons group
-		// 	//create a mutator for Player.Weapon
-		// 	//as user clicks a weapon on screen, initailize the value of weapon
 		// 	this.user = new Player(true);
 		// 	this.cpu = new Player(false);
 		//
@@ -297,42 +381,6 @@ public class RPS{
 		//
 		// }while(cont_bool);
 	}
-
-
-
-	// public JPanel testPanelChange(JPanel test) throws IOException
-	// {
-	// 	test = new JPanel();
-	// 	//background screen, set panel background
-	// 	BufferedImage image = ImageIO.read(new File("RPS_initScreen.jpg"));
-	// 	JLabel label = new JLabel( new ImageIcon(image));
-	//
-	// 	ButtonGroup weapons = new ButtonGroup();
-	// 	JRadioButton rock_radiobtn = new JRadioButton("Rock");
-	// 	JRadioButton paper_radiobtn = new JRadioButton("paper");
-	// 	JRadioButton scissors_radiobtn = new JRadioButton("scissors");
-	// 	weapons.add(rock_radiobtn);
-	// 	weapons.add(paper_radiobtn);
-	// 	weapons.add(scissors_radiobtn);
-	//
-	// 	ButtonGroup enemyWeapons = new ButtonGroup();
-	// 	JRadioButton rock_radiobtn2 = new JRadioButton("Rock");
-	// 	JRadioButton paper_radiobtn2 = new JRadioButton("paper");
-	// 	JRadioButton scissors_radiobtn2 = new JRadioButton("scissors");
-	// 	enemyWeapons.add(rock_radiobtn);
-	// 	enemyWeapons.add(paper_radiobtn);
-	// 	enemyWeapons.add(scissors_radiobtn);
-	//
-	//
-	// 	test.add(rock_radiobtn);
-	// 	test.add(paper_radiobtn);
-	// 	test.add(scissors_radiobtn);
-	// 	test.add(rock_radiobtn2);
-	// 	test.add(paper_radiobtn2);
-	// 	test.add(scissors_radiobtn2);
-	//
-	// 	return test;
-	// }
 
 	/*
 		A - Rock
