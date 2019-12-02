@@ -3,6 +3,7 @@ package games;
 //import EpsilonGameLauncher.*;
 
 //RPS dependencies
+import java.util.*;
 import java.util.Scanner;
 import java.io.*;
 import java.util.Random;
@@ -124,62 +125,45 @@ class InitialScreen extends JFrame{
 
 class RPSPlayFrame extends JFrame{
 	private static Player user, cpu;
+	private JButton btnShoot;
 	private ButtonGroup userWeapons;
 	private JRadioButton btnRock, btnPaper, btnScissors;
-	private JPanel pWeaponsOptions, pRPSWest, pRPSEast, pRPSCenter;
+	private JPanel pWeaponsOptions, pRPSEast, pRPSCenter;
 	private BufferedImage userWeaponImage;
 	private JLabel userWeaponLabel;
+	private Hashtable<String, JLabel> weaponImages;
+	private String weaponOfChoice;
+	public JPanel pRPSWest;
 
 	public RPSPlayFrame(){
+		setBackground(Color.white);
+		weaponImages = new Hashtable<String, JLabel>();
 		user = new Player(true);
 		cpu = new Player(false);
-
+		weaponOfChoice = "";
 		pRPSWest = new JPanel();
 		pRPSWest.setLayout(new FlowLayout());
 
+		// try{
+		// 	userWeaponImage = ImageIO.read(new File("rock.jpeg"));
+		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
+		// 	weaponImages.put("Rock", userWeaponLabel);
+		//
+		// 	userWeaponImage = ImageIO.read(new File("paper.png"));
+		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
+		// 	weaponImages.put("Paper", userWeaponLabel);
+		//
+		// 	userWeaponImage = ImageIO.read(new File("scissors.png"));
+		// 	userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
+		// 	weaponImages.put("Scissors", userWeaponLabel);
+		// }
+		// catch(Exception ioe){System.out.println("failed to load images");}
+
+		userWeaponLabel = new JLabel();
+		btnShoot = new JButton("Shoot!");
 		btnRock = new JRadioButton("Rock");
-		btnRock.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-				user.setWeapon("Rock");
-				System.out.println(user.getWeapon());
-				try{
-			 		userWeaponImage = ImageIO.read(new File("rock.jpeg"));
-					userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-					pRPSWest.add(userWeaponLabel);
-				}
-				catch(IOException exception){System.out.println("File \"rock.jpg\" Cannot Be Read!");}
-		}
-	});
 		btnPaper = new JRadioButton("Paper");
-		btnPaper.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-				user.setWeapon("Paper");
-				System.out.println(user.getWeapon());
-				try{
-					userWeaponImage = ImageIO.read(new File("paper.png"));
-					userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-					pRPSWest.add(userWeaponLabel);
-				}
-				catch(IOException exception){System.out.println("File \"paper.jpg\" Cannot Be Read!");}
-		}
-	});
 		btnScissors = new JRadioButton("Scissors");
-		btnScissors.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-				user.setWeapon("Scissors");
-				System.out.println(user.getWeapon());
-				try{
-					userWeaponImage = ImageIO.read(new File("scissors.jpg"));
-					userWeaponLabel = new JLabel( new ImageIcon(userWeaponImage));
-					pRPSWest.add(userWeaponLabel);
-				}
-				catch(IOException exception){	System.out.println("File \"scissors.jpg\" Cannot Be Read!");
-			}
-		}
-	});
 		userWeapons = new ButtonGroup();
 
 		userWeapons.add(btnRock);
@@ -189,12 +173,18 @@ class RPSPlayFrame extends JFrame{
 		pWeaponsOptions = new JPanel();
 		pWeaponsOptions.setBorder(BorderFactory.createTitledBorder("Choose Your Weapon!"));
 //		pWeaponsOptions.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-		pWeaponsOptions.setLayout(new GridLayout(1,3));
+		pWeaponsOptions.setLayout(new GridLayout(1,4));
 		pWeaponsOptions.add(btnRock);
 		pWeaponsOptions.add(btnPaper);
 		pWeaponsOptions.add(btnScissors);
+		pWeaponsOptions.add(btnShoot);
 
+		btnRock.addActionListener(new aButtonHandler(userWeaponLabel, user));
+		btnPaper.addActionListener(new aButtonHandler(userWeaponLabel, user));
+		btnShoot.addActionListener(new aButtonHandler(userWeaponLabel, user));
+		btnScissors.addActionListener(new aButtonHandler(userWeaponLabel, user));
 
+		pRPSWest.add(userWeaponLabel);
 		add(pWeaponsOptions, "South");
 		add(pRPSWest, "West");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -205,6 +195,61 @@ class RPSPlayFrame extends JFrame{
 
 		setVisible(true);
 
+	}
+
+	public class aButtonHandler implements ActionListener{
+		private JLabel transferLabel;
+		private Player user;
+
+		aButtonHandler(JLabel transferLabel, Player user)
+		{
+			this.transferLabel = transferLabel;
+			this.user = user;
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+			if(e.getSource() == btnShoot)
+			{
+				if(btnRock.isSelected())
+				{
+					user.setWeapon("Rock");
+					System.out.println("rock");
+					try{
+						userWeaponImage = ImageIO.read(new File("rock.jpeg"));
+						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+					}
+					catch(IOException ioe)
+					{
+						System.out.println("rock image failed to load");
+					}
+				}
+				else if(btnPaper.isSelected())
+				{
+					user.setWeapon("Paper");
+					try{
+						userWeaponImage = ImageIO.read(new File("paper.png"));
+						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+					}
+					catch(IOException ioe)
+					{
+						System.out.println("paper image failed to load");
+					}
+				}
+				else if(btnScissors.isSelected())
+				{
+					user.setWeapon("Scissors");
+					try{
+						userWeaponImage = ImageIO.read(new File("scissors.png"));
+						transferLabel.setIcon( new ImageIcon(userWeaponImage));
+					}
+					catch(IOException ioe)
+					{
+						System.out.println("scissors image failed to load");
+					}
+				}
+			}
+			//pRPSWest.add(weaponImages.get(weaponOfChoice));
+		}
 	}
 }
 
@@ -321,8 +366,8 @@ public class RPS{
 			return returnMessage[3];
 	}
 
-	public static void main(String[] args)throws NullPointerException{
-		// RPS newRPS = new RPS();
-		// newRPS.start();
-	}
+	// public static void main(String[] args)throws NullPointerException{
+	// 	// RPS newRPS = new RPS();
+	// 	// newRPS.start();
+	// }
 }
