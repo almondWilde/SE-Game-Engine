@@ -28,6 +28,7 @@ Dear Future Armand,
 */
 //access to games folder classes
 import games.*;
+import games.Bingo.Bingo;
 
 //GUI
 import javax.swing.*;
@@ -46,6 +47,7 @@ public class EpsilonGameLauncher extends JFrame
 	private JMenu NewGame_menu, Quit_menu, Help_menu;
 	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
 	private JPanel pMainMenu, pNorth;
+	private Bingo bingoGame;
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -94,7 +96,7 @@ public class EpsilonGameLauncher extends JFrame
 		pMainMenu.add(btnBlackJack);
 		pMainMenu.add(btnRockPaperScissors);
 		pMainMenu.add(btnMinsweeper);
-		
+
 		//set mainMenu appearance
 		pMainMenu.setBorder(BorderFactory.createTitledBorder("Games"));
 		pMainMenu.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
@@ -140,17 +142,16 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
-				TTT new_TTT = new TTT();
+
 			}
-			else if(e.getSource() == btnMinsweeper) {		// Bingo Button!
+			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
 			}
-			else if(e.getSource() == btnBlackJack) {		// Bingo Button!
+			else if(e.getSource() == btnBlackJack) {		// Black Jack Button!
 				System.out.println("BlackJack");
 			}
-			else if(e.getSource() == btnRockPaperScissors) {		// Bingo Button!
+			else if(e.getSource() == btnRockPaperScissors) {		// RPS Button!
 				System.out.println("RPS");
-				// getSuper();
 				try{
 					mainWindow.setVisible(false);
 					RPS newRPS = new RPS(mainWindow, pCenter);
@@ -161,7 +162,7 @@ public class EpsilonGameLauncher extends JFrame
 					System.out.println("RPS Failed to open");
 				}
 			}
-			else if(e.getSource() == btnThreeCardPoker) {		// Bingo Button!
+			else if(e.getSource() == btnThreeCardPoker) {		// Three Card Poker Button!
 				System.out.println("Three-Card Poker");
 			}
 
