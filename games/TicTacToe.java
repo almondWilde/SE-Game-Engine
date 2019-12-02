@@ -1,5 +1,5 @@
 //package games; 
-package tictactoe;
+package games.tictactoe;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
