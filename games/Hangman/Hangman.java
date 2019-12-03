@@ -12,9 +12,11 @@ public class Hangman {
     
     private String [] pool;   //a simple wordpool
     private String corpse = ("---\n   |\n   |\n   ");    //represents hangman
-    boolean playing = true; //purpose is to hide gamelauncher momentarily while game runs on terminal, changed to false when player done
-    
-    public Hangman () {
+    //boolean playing = true; //purpose is to hide gamelauncher momentarily while game runs on terminal, changed to false when player done
+    private JFrame mainWindow;
+    public Hangman (JFrame m) {
+        mainWindow = m;
+        mainWindow.setVisible (false);
         
         JOptionPane.showMessageDialog (null, "The Hangman game is ran from terminal and launch menu will be hidden.");
         JOptionPane.showMessageDialog(null, "One Hint: No word has letter q and if q is entered then game will return to launcher"); 
@@ -143,6 +145,7 @@ public class Hangman {
     
     public void ReturnToLauncher () {
         clearConsole ();
+        mainWindow.setVisible (true);
         return;
     }
     public static void clearConsole() {
