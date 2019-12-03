@@ -63,12 +63,13 @@ class BingoGUI extends JPanel
         JLabel numDrawn = new JLabel("None");
         JLabel prevNumDrawn = new JLabel("Previous # Drawn");
         JLabel prevDrawn = new JLabel("None");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         btnReturn.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispose();
             }
         });
         btnDraw.addActionListener(new ActionListener()
@@ -552,4 +553,4 @@ class BingoGUI extends JPanel
         frame.setVisible(true);
     }
 }
-// 306 lines
+// 307 lines
