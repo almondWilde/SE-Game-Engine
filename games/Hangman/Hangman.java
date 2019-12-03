@@ -1,4 +1,4 @@
-//package games.Hangman;
+package games.Hangman;
 package hangman;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
