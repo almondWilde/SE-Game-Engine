@@ -1,4 +1,5 @@
 // Author: Derrick Chan
+package games.Bingo;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -233,4 +234,5 @@ public class BingoGame
         return false;
     }
 }
+
 // 106 lines
