@@ -30,10 +30,11 @@ public class EpsilonGameLauncher extends JFrame
 {
 	private JMenuBar menuBar;
 	private JMenu NewGame_menu, Quit_menu, Help_menu;
-	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
+	private JButton btnTicTacToe,btnBingo,btnHangman,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
 	private JPanel pMainMenu, pNorth;
 	private Bingo bingoGame;
 	private TicTacToe tttGame;
+	private Hangman hangmanGame;
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -59,6 +60,8 @@ public class EpsilonGameLauncher extends JFrame
 		btnTicTacToe.setToolTipText("Play TicTacTie");
 		btnBingo = new JButton("Bingo");
 		btnBingo.setToolTipText("Play Bingo");
+		btnHangman = new JButton ("Hangman");
+		btnHangman.setToolTipText ("Play Hangman");
 		btnBlackJack = new JButton("BlackJack");
 		btnBlackJack.setToolTipText("Play BlackJack");
 		btnRockPaperScissors = new JButton("RockPaperScissors");
@@ -75,6 +78,7 @@ public class EpsilonGameLauncher extends JFrame
 		//buttons are added to the main menu
 		pMainMenu.add(btnTicTacToe);
 		pMainMenu.add(btnBingo);
+		pMainMenu.add (btnHangman);
 		pMainMenu.add(btnBlackJack);
 		pMainMenu.add(btnRockPaperScissors);
 		pMainMenu.add(btnMinsweeper);
@@ -129,6 +133,10 @@ public class EpsilonGameLauncher extends JFrame
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
 				tttGame = new TicTacToe ();
+			}
+			else if (e.getSource () == btnHangman) {
+				System.out.println ("Hangman);
+				hangmanGame = new Hangman (mainWindow);
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
