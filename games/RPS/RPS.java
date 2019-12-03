@@ -1,4 +1,4 @@
-package games;
+package games.RPS;
 
 //RPS dependencies
 import java.util.*;
@@ -374,10 +374,10 @@ class RPSPlayFrame extends JFrame{
 				{
 					user.setWeapon("Paper");
 					System.out.println("user selected paper");
-					userWeaponLabel.setText("nPaper");
+					userWeaponLabel.setText("Paper");
 
 					try{
-						userWeaponImage = ImageIO.read(new File("paper.jpeg"));
+						userWeaponImage = ImageIO.read(new File("games/RPS/paper.jpeg"));
 						userWeaponLabel.setIcon( new ImageIcon(userWeaponImage));
 					}
 					catch(IOException ioe)
