@@ -1,6 +1,4 @@
-package games.RPS;
-
-//import EpsilonGameLauncher.*;
+package games;
 
 //RPS dependencies
 import java.util.*;
@@ -27,62 +25,67 @@ import javax.imageio.ImageIO;
 
 class Player{
 	private String weapon; /* A: Rock B: Paper C: Scissors */
-	private boolean isUser;
+	private boolean isUser, terminalPlay;
 
+	Player(boolean isUser, boolean terminalPlay)
+	{
+		this.isUser = isUser;
+		this.weapon = "";
+		this.terminalPlay = terminalPlay;
+
+		Scanner scan = new Scanner(System.in);
+		boolean valid = false;
+
+		//not user
+		if(!this.isUser)
+		{
+			System.out.println("cpu flag");
+			Random rand = new Random();
+			int randint = rand.nextInt(3);
+			switch( randint ){
+				case 0:
+					this.weapon = "A";	//Rock
+					break;
+				case 1:
+					this.weapon = "B";	//Paper
+					break;
+				case 2:
+					this.weapon = "C";	//Scissors
+					break;
+			}
+
+			System.out.println("cpu weapon" + this.weapon);
+		}
+		else{
+			System.out.println("user flag");
+			//is user
+			String user_weapon = "";
+			do{
+				System.out.println("Choose your Weapon!\nA) Rock\nB) Paper\nC) Scissors\n\n");
+				weapon = scan.nextLine();
+				weapon.toUpperCase();
+
+				valid = weapon.matches("[A-C,a-c]+");
+				if(!valid){
+					System.out.println("Invalid Weapon Choice! Choose another weapon..!\n\n");
+				}
+			}
+			while(!valid);
+			this.weapon = weapon;
+		}
+	}
 	Player(boolean isUser){
 		this.isUser = isUser;
 		this.weapon = "";
-		//
-		// Scanner scan = new Scanner(System.in);
-		// boolean valid = false;
-		//
-		//
-		// //not user
-		// if(!this.isUser)
-		// {
-		// 	System.out.println("cpu flag");
-		// 	Random rand = new Random();
-		// 	int randint = rand.nextInt(3);
-		// 	switch( randint ){
-		// 		case 0:
-		// 			this.weapon = "A";	//Rock
-		// 			break;
-		// 		case 1:
-		// 			this.weapon = "B";	//Paper
-		// 			break;
-		// 		case 2:
-		// 			this.weapon = "C";	//Scissors
-		// 			break;
-		// 	}
-		//
-		// 	System.out.println("cpu weapon" + this.weapon);
-		// }
-		// else{
-		// 	System.out.println("user flag");
-		// 	//is user
-		// 	String user_weapon = "";
-		// 	do{
-		// 		System.out.println("Choose your Weapon!\nA) Rock\nB) Paper\nC) Scissors\n\n");
-		// 		weapon = scan.nextLine();
-		// 		weapon.toUpperCase();
-		//
-		// 		valid = weapon.matches("[A-C,a-c]+");
-		// 		if(!valid){
-		// 			System.out.println("Invalid Weapon Choice! Choose another weapon..!\n\n");
-		// 		}
-		// 	}
-		// 	while(!valid);
-		// 	this.weapon = weapon;
-		// }
+
 	}
 	public String getWeapon() { return this.weapon; }
 	public boolean getIsUser() { return isUser;}
 	public void setWeapon(String weapon) {this.weapon = weapon;}
 }
 
-
 class InitialScreen extends JFrame{
-	private JButton btnPlay, btnReturn;
+	private JButton btnPlay, btnReturn, btnTerminalPlay;
 	private JPanel optionsPanel;
 
 	InitialScreen()
@@ -93,6 +96,9 @@ class InitialScreen extends JFrame{
 		btnPlay.addActionListener(new aButtonHandler());
 		btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new aButtonHandler());
+		btnTerminalPlay = new JButton("Terminal Play");
+		btnTerminalPlay.addActionListener(new aButtonHandler());
+
 
 		setSize(300, 100);
 		setResizable(true);
@@ -103,8 +109,10 @@ class InitialScreen extends JFrame{
 
 		add(btnPlay);
 		add(btnReturn);
+		add(btnTerminalPlay);
 		optionsPanel.add(btnPlay);
 		optionsPanel.add(btnReturn);
+		optionsPanel.add(btnTerminalPlay);
 		optionsPanel.setBackground(Color.blue);
 		add(optionsPanel);
 		setLocation(screenSize.width / 3+100, screenSize.height / 3);
@@ -123,10 +131,77 @@ class InitialScreen extends JFrame{
 			else if(e.getSource() == btnReturn){
 				setVisible(false);
 			}
+			else if(e.getSource() == btnTerminalPlay){
+				RPSTerminalPlay playRPSTerminal = new RPSTerminalPlay();
+			}
 		}
 	}
 }
 
+class RPSTerminalPlay{
+	private boolean cont_bool;
+	private String cont_response;
+	private Scanner cont_scanner;
+	private Player user, cpu;
+
+	public RPSTerminalPlay(){
+    //terminal game play
+    cont_scanner = new Scanner(System.in);
+    do{
+    	this.user = new Player(true,true);
+    	this.cpu = new Player(false,true);
+
+    	System.out.println( decideWinner(user, cpu) );
+
+    	do{
+    		//pop up window
+    		System.out.println( "Do you want to play again? [Y/N] ");
+    		cont_response = cont_scanner.nextLine();
+    		cont_response = cont_response.toUpperCase();
+
+    		if(cont_response.equals("Y"))
+    			cont_bool = true;
+    		else if( cont_response.equals("N") )
+    			cont_bool = false;
+
+    	}while(!cont_response.equals("Y") && !cont_response.equals("N") );
+
+    }while(cont_bool);
+	}
+
+	public String decideWinner(Player user, Player cpu)
+	{
+		String[] returnMessage = {"DRAW", "USER WINS", "CPU WINS", "ERROR TRY AGAIN"};
+		String uw = user.getWeapon(), cw = cpu.getWeapon();
+
+			if( uw.equals( cw ) )
+				return returnMessage[0];
+			else if( cw.equals("Rock") ){		//cpu has a rock
+				System.out.print(uw);
+				if(uw.equals("Paper"))		//user has paper; user wins
+					return returnMessage[1];
+				else if(uw.equals("Scissors"))		//user has scissors; user loses
+					return returnMessage[2];
+			}
+			else if( cw.equals("Paper") ){		//cpu has paper
+				System.out.print(uw);
+				if(uw.equals("Rock"))		//user has rock; user loses
+					return returnMessage[2];
+				else if(uw.equals("Scissors"))		//user has scissors; user wins
+					return returnMessage[1];
+			}
+			else if( cw.equals("Scissors") ){		//cpu has scissors
+				System.out.print(uw);
+				if(uw.equals("Rock"))		//user has rock; user wins
+					return returnMessage[1];
+				else if(uw.equals("Paper"))		//user has paper; user loses
+					return returnMessage[2];
+			}
+			System.out.println(cw);
+
+			return returnMessage[3];
+	}
+}
 class RPSPlayFrame extends JFrame{
 	private static Player user, cpu;
 	private JButton btnShoot;
@@ -341,81 +416,8 @@ class RPSPlayFrame extends JFrame{
 }
 
 public class RPS{
-	private boolean cont_bool;
-	private String cont_response;
-	private Scanner cont_scanner;
-
-	private JPanel pInit;
-	private JButton btnPlay, btnMainMenu;
-
 	public RPS(JFrame mainWindow, JPanel pCenter) throws IOException{
-		//Rock, Paper, Scissors game start
-		//init screen
-		// pInit = new JPanel();
-		// pInit.add()
-		// add(pInit,"West");
 		InitialScreen init = new InitialScreen();
 		init.show();
-
-
-		//terminal game play
-		// cont_scanner = new Scanner(System.in);
-		// do{
-		// 	this.user = new Player(true);
-		// 	this.cpu = new Player(false);
-		//
-		// 	System.out.println( this.battle(user, cpu) );
-		//
-		// 	do{
-		// 		//pop up window
-		// 		System.out.println( "Do you want to play again? [Y/N] ");
-		// 		cont_response = cont_scanner.nextLine();
-		// 		cont_response = cont_response.toUpperCase();
-		//
-		// 		if(cont_response.equals("Y"))
-		// 			cont_bool = true;
-		// 		else if( cont_response.equals("N") )
-		// 			cont_bool = false;
-		//
-		// 	}while(!cont_response.equals("Y") && !cont_response.equals("N") );
-		//
-		// }while(cont_bool);
 	}
-
-	/*
-		A - Rock
-		B - Paper
-		C - Scissors
-	*/
-	public static String battle(Player user, Player cpu){
-		String[] returnMessage = {"DRAW", "USER WINS", "CPU WINS", "ERROR ERROR TRY AGAIN"};
-		String uw = user.getWeapon().toUpperCase(), cw = cpu.getWeapon().toUpperCase();
-
-			if( uw.equals( cw ) )
-				return returnMessage[0];
-			else if( cw.equals("Rock") ){		//cpu has a rock
-				if(uw.equals("Paper"))		//user has paper; user wins
-					return returnMessage[1];
-				else if(uw.equals("Scissors"))		//user has scissors; user loses
-					return returnMessage[2];
-			}
-			else if( cw.equals("Paper") ){		//cpu has paper
-				if(uw.equals("Rock"))		//user has rock; user loses
-					return returnMessage[2];
-				else if(uw.equals("Scissors"))		//user has scissors; user wins
-					return returnMessage[1];
-			}
-			else if( cw.equals("Scissors") ){		//cpu has scissors
-				if(uw.equals("Rock"))		//user has rock; user wins
-					return returnMessage[1];
-				else if(uw.equals("Paper"))		//user has paper; user loses
-					return returnMessage[2];
-			}
-			return returnMessage[3];
-	}
-
-	// public static void main(String[] args)throws NullPointerException{
-	// 	// RPS newRPS = new RPS();
-	// 	// newRPS.start();
-	// }
 }
