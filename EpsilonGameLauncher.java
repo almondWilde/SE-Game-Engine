@@ -8,24 +8,6 @@
 	11/26/19
 	10/24/19
 **/
-/*
-Dear Future Armand,
-	You can change a Jpanel from another class by assigning it to the output of
-	 a JPanel function from the game class.
-
-	There is also a problem with changing the panel from the ActionListener class.
-	Perhaps you could make classes for each game in the EpsilonGameLauncher class,
-	and call them at the appropriate button presses.
-
-	You should really read those GUI ppt slides, theres some concepts here that
-	you just aren't getting. The Java GUI philosophy doesn't jive like what you've
-	done before. You may even find more efficient ways of completing this
-	walpurginacht.
-
-	Sincerely,
-	Armand of 11/28/19
-
-*/
 //access to games folder classes
 import games.*;
 import games.Bingo.Bingo;
@@ -52,7 +34,7 @@ public class EpsilonGameLauncher extends JFrame
 	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
 	private JPanel pMainMenu, pNorth;
 	private Bingo bingoGame;
-	private TicTacToe tttGame;   
+	private TicTacToe tttGame;
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -147,7 +129,7 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
-				tttGame = new TicTacToe ();    
+				tttGame = new TicTacToe ();
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
@@ -199,4 +181,3 @@ public class EpsilonGameLauncher extends JFrame
 		*/
 	}
 }
-
