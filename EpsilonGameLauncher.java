@@ -29,7 +29,10 @@ Dear Future Armand,
 //access to games folder classes
 import games.*;
 import games.Bingo.Bingo;
-import games.tictactoe.TicTacToe; 
+import games.TicTacToe.TicTacToe;
+import games.BlackJack.BlackJack;
+import games.RPS.RPS;
+import games.Minesweeper.Minesweeper
 
 //GUI
 import javax.swing.*;
@@ -75,8 +78,6 @@ public class EpsilonGameLauncher extends JFrame
 		btnTicTacToe.setToolTipText("Play TicTacTie");
 		btnBingo = new JButton("Bingo");
 		btnBingo.setToolTipText("Play Bingo");
-		btnThreeCardPoker = new JButton("ThreeCardPoker");
-		btnThreeCardPoker.setToolTipText("Play ThreeCardPoker");
 		btnBlackJack = new JButton("BlackJack");
 		btnBlackJack.setToolTipText("Play BlackJack");
 		btnRockPaperScissors = new JButton("RockPaperScissors");
@@ -89,12 +90,10 @@ public class EpsilonGameLauncher extends JFrame
 		btnBlackJack.addActionListener(new aButtonHandler());
 		btnMinsweeper.addActionListener(new aButtonHandler());
 		btnRockPaperScissors.addActionListener(new aButtonHandler());
-		btnThreeCardPoker.addActionListener(new aButtonHandler());
 
 		//buttons are added to the main menu
 		pMainMenu.add(btnTicTacToe);
 		pMainMenu.add(btnBingo);
-		pMainMenu.add(btnThreeCardPoker);
 		pMainMenu.add(btnBlackJack);
 		pMainMenu.add(btnRockPaperScissors);
 		pMainMenu.add(btnMinsweeper);
@@ -174,9 +173,6 @@ public class EpsilonGameLauncher extends JFrame
 					//failed to play a game
 					System.out.println("RPS Failed to open");
 				}
-			}
-			else if(e.getSource() == btnThreeCardPoker) {		// Three Card Poker Button!
-				System.out.println("Three-Card Poker");
 			}
 
 			}
