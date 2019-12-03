@@ -21,4 +21,4 @@ public class Bingo
 }
 
 // 7 lines of code
-// 523 total lines
+// 527 total lines
