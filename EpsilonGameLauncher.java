@@ -32,7 +32,7 @@ import games.Bingo.Bingo;
 import games.TicTacToe.TicTacToe;
 import games.BlackJack.BlackJack;
 import games.RPS.RPS;
-import games.Minesweeper.Minesweeper
+import games.Minesweeper.Minesweeper;
 
 //GUI
 import javax.swing.*;
@@ -53,7 +53,6 @@ public class EpsilonGameLauncher extends JFrame
 	private JPanel pMainMenu, pNorth;
 	private Bingo bingoGame;
 	private TicTacToe tttGame;   
-        private Minesweeper minesweeperGame;
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -83,7 +82,7 @@ public class EpsilonGameLauncher extends JFrame
 		btnBlackJack.setToolTipText("Play BlackJack");
 		btnRockPaperScissors = new JButton("RockPaperScissors");
 		btnRockPaperScissors.setToolTipText("Play Rock, Paper, Scissors");
-		btnMinsweeper = new JButton("Minesweeper");
+		btnMinsweeper = new JButton("Minsweeper");
 		btnMinsweeper.setToolTipText("Play Minsweeper");
 
 		btnBingo.addActionListener(new aButtonHandler());
@@ -152,8 +151,14 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
-                                minesweeperGame = new Minesweeper();
-                                minesweeperGame.startMinesweeper();
+				try {
+                Minesweeper newMinesweeper = new Minesweeper();
+                newMinesweeper.startMinesweeper();
+				}
+				catch (Exception IOException) {
+					//failed to play game
+					System.out.println("Minesweeper Failed to open");
+				}
 			}
 			else if(e.getSource() == btnBlackJack) {		// Black Jack Button!
 				System.out.println("BlackJack");
@@ -194,3 +199,4 @@ public class EpsilonGameLauncher extends JFrame
 		*/
 	}
 }
+
