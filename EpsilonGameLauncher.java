@@ -137,7 +137,7 @@ public class EpsilonGameLauncher extends JFrame
 				tttGame = new TicTacToe ();
 			}
 			else if (e.getSource () == btnHangman) {
-				System.out.println ("Hangman);
+				System.out.println ("Hangman");
 				hangmanGame = new Hangman (mainWindow); //
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
