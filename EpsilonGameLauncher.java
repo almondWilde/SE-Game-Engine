@@ -29,6 +29,7 @@ Dear Future Armand,
 //access to games folder classes
 import games.*;
 import games.Bingo.Bingo;
+import games.tictactoe.TicTacToe; 
 
 //GUI
 import javax.swing.*;
@@ -48,6 +49,7 @@ public class EpsilonGameLauncher extends JFrame
 	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
 	private JPanel pMainMenu, pNorth;
 	private Bingo bingoGame;
+	private TicTacToe tttGame;
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -146,7 +148,7 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
-
+				tttGame = new TicTacToe (); 
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
