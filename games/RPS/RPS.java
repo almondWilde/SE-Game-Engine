@@ -214,7 +214,6 @@ class RPSPlayFrame extends JFrame{
 	public JPanel pRPSCenter;
 
 	public RPSPlayFrame() throws IOException{
-		setBackground(Color.white);
 		victorLabel = new JLabel("Rock, Paper, Scisors!");
 		userWeaponLabel = new JLabel();
 		user = new Player(true);
@@ -270,6 +269,8 @@ class RPSPlayFrame extends JFrame{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(screenSize.width / 4, screenSize.height / 4);
 		setSize((screenSize.height / 2)+100, screenSize.width / 2);
+		setBackground(Color.white);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(true);
 		setTitle("Rock, Paper, Scissors!");
 
@@ -374,10 +375,10 @@ class RPSPlayFrame extends JFrame{
 				{
 					user.setWeapon("Paper");
 					System.out.println("user selected paper");
-					userWeaponLabel.setText("Paper");
+					userWeaponLabel.setText("	Paper");
 
 					try{
-						userWeaponImage = ImageIO.read(new File("games/RPS/paper.jpeg"));
+						userWeaponImage = ImageIO.read(new File("paper.jpeg"));
 						userWeaponLabel.setIcon( new ImageIcon(userWeaponImage));
 					}
 					catch(IOException ioe)
