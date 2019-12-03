@@ -29,6 +29,7 @@ public class LoseGUI extends JPanel
         
         JButton btnPlay = new JButton("Play Again?");
         JButton btnReturn = new JButton("Main Menu");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         btnPlay.addActionListener(new ActionListener()
         {
@@ -45,7 +46,7 @@ public class LoseGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispose();
             }
         });
         
@@ -65,4 +66,4 @@ public class LoseGUI extends JPanel
     }
 }
 
-// 31 lines
+// 32 lines
