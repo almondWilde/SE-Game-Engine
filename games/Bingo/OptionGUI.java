@@ -18,6 +18,7 @@ class OptionGUI extends JPanel
         JPanel mainPanel = new JPanel(new FlowLayout());
         JButton btnPlay = new JButton("Play");
         JButton btnReturn = new JButton("Main Menu");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // When Play button is clicked
         btnPlay.addActionListener(new ActionListener()
         {
@@ -35,7 +36,7 @@ class OptionGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispose();
             }
         });
         mainPanel.add(btnPlay);
@@ -53,4 +54,4 @@ class OptionGUI extends JPanel
     }
 }
 
-// 24 lines
+// 25 lines
