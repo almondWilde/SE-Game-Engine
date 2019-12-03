@@ -14,6 +14,7 @@ import games.TicTacToe.TicTacToe;
 import games.BlackJack.BlackJack;
 import games.RPS.RPS;
 import games.Minesweeper.Minesweeper;
+import games.Hangman.Hangman; 
 
 //GUI
 import javax.swing.*;
