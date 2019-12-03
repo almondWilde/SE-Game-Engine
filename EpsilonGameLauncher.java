@@ -49,7 +49,7 @@ public class EpsilonGameLauncher extends JFrame
 	private JButton btnTicTacToe,btnBingo,btnThreeCardPoker,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
 	private JPanel pMainMenu, pNorth;
 	private Bingo bingoGame;
-	private TicTacToe tttGame;
+	private TicTacToe tttGame;   
 
 	public JPanel pCenter;
 	public JFrame mainWindow;
@@ -148,7 +148,7 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnTicTacToe) {		// TicTacToe Button!
 				System.out.println("TicTacToe");
-				tttGame = new TicTacToe (); 
+				tttGame = new TicTacToe ();    
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
