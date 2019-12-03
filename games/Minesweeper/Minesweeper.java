@@ -97,7 +97,7 @@ public class Minesweeper
 		frame.setResizable(false);
 		frame.add(menuBar, BorderLayout.NORTH);
 		frame.add(container, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		frame.setVisible(true);
 	}
