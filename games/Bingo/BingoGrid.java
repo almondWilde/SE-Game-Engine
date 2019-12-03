@@ -1,3 +1,6 @@
+// Author: Derrick Chan
+package games.Bingo;
+
 // BingoGrid object class
 public class BingoGrid 
 {
@@ -35,3 +38,5 @@ public class BingoGrid
         return isCalled;
     }
 }
+
+// 18 lines
