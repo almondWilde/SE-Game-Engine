@@ -1,4 +1,5 @@
 // Author: Derrick Chan
+package games.Bingo;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -34,8 +35,7 @@ class OptionGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                // Return to Epsilon Game Launcher
-                System.out.println("return");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
         mainPanel.add(btnPlay);
