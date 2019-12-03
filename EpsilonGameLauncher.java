@@ -14,7 +14,7 @@ import games.TicTacToe.TicTacToe;
 import games.BlackJack.BlackJack;
 import games.RPS.RPS;
 import games.Minesweeper.Minesweeper;
-import games.Hangman.Hangman; 
+import games.Hangman.Hangman;
 
 //GUI
 import javax.swing.*;
@@ -137,7 +137,7 @@ public class EpsilonGameLauncher extends JFrame
 				tttGame = new TicTacToe ();
 			}
 			else if (e.getSource () == btnHangman) {
-				System.out.println ("Hangman);
+				System.out.println ("Hangman");
 				hangmanGame = new Hangman (mainWindow); //
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
@@ -180,13 +180,5 @@ public class EpsilonGameLauncher extends JFrame
 	public static void main(String[] args) throws IOException
 	{
 		EpsilonGameLauncher launcher = new EpsilonGameLauncher();
-		/*
-			ToDo:
-				pCenter panel with a function outside of LibGui class
-					this will enable a single function call for each game upon button click
-					each game function would be able to update the jpanel with the appropriate GUI
-						init() functions may have to take in a JPanel object as argument
-				Adapt LibGui class Slick2D
-		*/
 	}
 }
