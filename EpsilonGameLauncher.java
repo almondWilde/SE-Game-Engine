@@ -153,7 +153,14 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if(e.getSource() == btnBlackJack) {		// Black Jack Button!
 				System.out.println("BlackJack");
-				new BlackJack();
+				try{
+					mainWindow.setVisible(true);
+					BlackJack newBlackJack = new BlackJack(mainWindow, pCenter);
+				}
+				catch(Exception IOException){
+					//failed to play a game
+					System.out.println("BlackJack Failed to open");
+				}
 			}
 			else if(e.getSource() == btnRockPaperScissors) {		// RPS Button!
 				System.out.println("RPS");
