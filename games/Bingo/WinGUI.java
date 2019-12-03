@@ -1,4 +1,5 @@
 // Author: Derrick Chan
+package games.Bingo;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -10,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class winGUI extends JPanel
+public class WinGUI extends JPanel
 {
     JFrame frame = new JFrame("Winner");
     private static BingoGUI bingo;
@@ -43,8 +44,7 @@ public class winGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                // Return to Epsilon Game Launcher
-                System.out.println("return");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
         
@@ -63,4 +63,5 @@ public class winGUI extends JPanel
         frame.setVisible(true);
     }
 }
+
 // 31 lines
