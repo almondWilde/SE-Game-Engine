@@ -1,4 +1,5 @@
 // Author: Derrick Chan
+package games.Bingo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -16,8 +17,8 @@ import javax.swing.JPanel;
 class BingoGUI extends JPanel
 {
     JFrame frame = new JFrame("Bingo");
-    private winGUI win;
-    private loseGUI lose;
+    private WinGUI win;
+    private LoseGUI lose;
     
     public void addComponentsToPane(Container pane)
     {
@@ -67,8 +68,7 @@ class BingoGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                // Return to Epsilon Game Launcher
-                System.out.println("return");
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
         btnDraw.addActionListener(new ActionListener()
@@ -87,14 +87,14 @@ class BingoGUI extends JPanel
                 if(bingo.checkBingo())
                 {
                     System.out.println("You win");
-                    win = new winGUI();
+                    win = new WinGUI();
                     win.createAndShowGUI();
                     frame.dispose();
                 }
                 else
                 {
                     System.out.println("You lose");
-                    lose = new loseGUI();
+                    lose = new LoseGUI();
                     lose.createAndShowGUI();
                     frame.dispose();
                 }
