@@ -74,6 +74,7 @@ public class EpsilonGameLauncher extends JFrame
 		btnBlackJack.addActionListener(new aButtonHandler());
 		btnMinsweeper.addActionListener(new aButtonHandler());
 		btnRockPaperScissors.addActionListener(new aButtonHandler());
+		btnHangman.addActionListener (new aButtonHandler ());
 
 		//buttons are added to the main menu
 		pMainMenu.add(btnTicTacToe);
@@ -136,7 +137,7 @@ public class EpsilonGameLauncher extends JFrame
 			}
 			else if (e.getSource () == btnHangman) {
 				System.out.println ("Hangman);
-				hangmanGame = new Hangman (mainWindow);
+				hangmanGame = new Hangman (mainWindow); //
 			}
 			else if(e.getSource() == btnMinsweeper) {		// Minesweeper Button!
 				System.out.println("Minesweeper");
