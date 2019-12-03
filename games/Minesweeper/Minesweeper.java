@@ -1,6 +1,5 @@
-package games.Minesweeper;
 //Author: Megan Rozal
-package minesweeper;
+package games.Minesweeper;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

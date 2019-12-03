@@ -1,5 +1,5 @@
 //Author: Megan Rozal
-package minesweeper;
+package games.Minesweeper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
