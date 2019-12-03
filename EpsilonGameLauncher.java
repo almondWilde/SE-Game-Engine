@@ -9,7 +9,6 @@
 	10/24/19
 **/
 //access to games folder classes
-import games.*;
 import games.Bingo.Bingo;
 import games.TicTacToe.TicTacToe;
 import games.BlackJack.BlackJack;
