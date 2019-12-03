@@ -28,6 +28,7 @@ public class WinGUI extends JPanel
         
         JButton btnPlay = new JButton("Play Again?");
         JButton btnReturn = new JButton("Main Menu");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         btnPlay.addActionListener(new ActionListener()
         {
@@ -44,7 +45,7 @@ public class WinGUI extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.dispose();
             }
         });
         
@@ -64,4 +65,4 @@ public class WinGUI extends JPanel
     }
 }
 
-// 31 lines
+// 32 lines
