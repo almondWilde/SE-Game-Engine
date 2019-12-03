@@ -1,4 +1,4 @@
-package games;
+package games.RPS;
 
 //import EpsilonGameLauncher.*;
 
