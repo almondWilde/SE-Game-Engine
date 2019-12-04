@@ -20,8 +20,18 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Main Driver for Minesweeper Game
+ * @author Megan Rozal
+ * @version 1.0
+ */
+
 public class Minesweeper
 {
+    /**
+     * Creates menu bar, frame, and container which gives the player the option to select difficulty level and board size. Also adds titles and restart time.
+     * @throws IOException 
+     */
 	public void startMinesweeper() throws IOException
 	{
 		JFrame frame = new JFrame();
@@ -97,7 +107,7 @@ public class Minesweeper
 		frame.setResizable(false);
 		frame.add(menuBar, BorderLayout.NORTH);
 		frame.add(container, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setVisible(true);
 	}
@@ -106,18 +116,27 @@ public class Minesweeper
 
 class updateBoard implements ActionListener
 {
+    /**
+     * Updates board's panel, row and column
+     */
 	private JPanel panel;
 	private JTextField fieldRow;
 	private JTextField fieldCol;
 	
 	public updateBoard(JPanel panel, JTextField fieldRow, JTextField fieldCol)
 	{
+            /**
+             * Updates board per field with a number
+             */
 		this.panel = panel;
 		this.fieldRow = fieldRow;
 		this.fieldCol = fieldCol;
 	}
 	public void actionPerformed(ActionEvent e)
 	{
+            /**
+             * Removes all items from board
+             */
 		panel.removeAll();
 		int nbRow = Integer.valueOf(fieldRow.getText());
 		int nbCol = Integer.valueOf(fieldCol.getText());

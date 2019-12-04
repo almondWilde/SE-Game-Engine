@@ -8,8 +8,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Grid class represents the GUI for the Minesweeper board
+ * @author Megan Rozal
+ */
+
 public class Grid
 {
+    /**
+     * Creates rows, columns, bombs, cells, and finished boolean 
+     */
 	private int nbRow;
 	private int nbCol;
 	private int nbBombs;
@@ -17,7 +25,10 @@ public class Grid
 	private boolean finished;
 	
 	public Grid(int nbRow, int nbCol, int nbBombs, JLabel label)
-	{		
+	{
+            /**
+             * Creates a layout for each cell on the grid by row and column depending on the size of the board
+             */
 		this.nbRow = nbRow;
 		this.nbCol = nbCol;
 		this.nbBombs = nbBombs;
@@ -38,6 +49,9 @@ public class Grid
 	
 	private void placeBombs()
 	{
+            /**
+             * Randomly places bombs on the board
+             */
 		Random rand = new Random();
 		
 		for(int i=0; i < nbBombs; i++)
@@ -56,6 +70,9 @@ public class Grid
 	
 	private void findNearBombs()
 	{
+            /**
+             * When the player clicks on a cell, it finds the nearest bombs surrounding it
+             */
 		for(int i=0; i < nbRow; i++)
 			for(int j=0; j < nbCol; j++)
 			{
@@ -84,6 +101,9 @@ public class Grid
 	
 	private boolean isIndexOk(int i, int j)
 	{
+            /**
+             * Checks for the index and return the surrounding result numbers
+             */
 		boolean result = false;
 		
 		if(i >= 0 && i < nbRow && j >= 0 && j < nbCol)
@@ -94,6 +114,9 @@ public class Grid
 	
 	public void constructPanel(JPanel panel)
 	{
+            /**
+             * Creates the panel for the board, including its color, the cells, and the MouseListener functionality 
+             */
 		panel.removeAll();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setLayout(new GridLayout(nbRow, nbCol));
@@ -110,6 +133,9 @@ public class Grid
 	
 	public void checkAround(Cell aCase)
 	{
+            /**
+             * Checks for surrounding cells around the cell that was clicked by user
+             */
 		int i = aCase.getRow();
 		int j = aCase.getCol();
 		
@@ -133,6 +159,9 @@ public class Grid
 	
 	public void setFinished()
 	{
+            /**
+             * If user has clicked on a bomb, this method displays all bombs
+             */
 		finished = true;
 		Settings.hasStarted = false;
 		viewBombs();
@@ -140,11 +169,17 @@ public class Grid
 	
 	public boolean finished()
 	{
+            /**
+             * Boolean returns true if the user is finished with the game
+             */
 		return finished;
 	}
 	
-	public boolean check() // true if the player has won
+	public boolean check() 
 	{
+            /**
+             * Checks if the player has won
+             */
 		for(int i=0; i < nbRow; i++)
 			for(int j=0; j < nbCol; j++)
 			{
@@ -156,12 +191,18 @@ public class Grid
 	
 	public void congratulations()
 	{
+            /**
+             * Displays all bombs and congratulations message
+             */
 		viewBombs();
 		JOptionPane.showMessageDialog(null,"Congratulations! You've Won Minesweeper!");
 	}
 	
 	public void viewBombs()
 	{
+            /**
+             * Displays all bombs on board
+             */
 		for(int i=0; i < nbRow; i++)
 			for(int j=0; j < nbCol; j++)
 				if(cells[i][j].getBomb())

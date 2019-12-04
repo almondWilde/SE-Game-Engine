@@ -8,8 +8,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Class that contains the functionalities of the menu bar
+ * @author Megan Rozal
+ */
 public class MenuAction implements ActionListener
 {
+    /**
+     * Creates labels and panels for time, bombs left, and the overall frame
+     */
 	private JLabel bombsLeft;
 	private JPanel panel;
 	private JLabel time;
@@ -17,6 +24,9 @@ public class MenuAction implements ActionListener
 	
 	public MenuAction(JFrame frame, JPanel panel, JLabel bombsLeft, JLabel time)
 	{
+            /**
+             * Creates references to the below objects
+             */
 		this.bombsLeft = bombsLeft;
 		this.panel = panel;
 		this.time = time;
@@ -25,6 +35,12 @@ public class MenuAction implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
+            /**
+             * Creates board size and dimensions according to the number of cells
+             * Creates the level settings to easy, medium, or hard
+             * Creates a bomb counter that counts how many bombs are left on the board
+             * Sets the time counter to 0
+             */
 
 		if(e.getActionCommand() == "10x10")
 		{
