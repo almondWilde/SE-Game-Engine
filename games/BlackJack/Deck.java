@@ -1,11 +1,11 @@
-/*
- Class: Deck
- Creates a standard deck of playing cards
- @author Ryan Flynn
- Last Edit: 12/2/19
- 12/1/19
- 11/27/19
- 11/20/19
+/**
+ * Class: Deck
+ * Creates a standard deck of playing cards
+ * @author Ryan Flynn
+ * Last Edit: 12/2/19
+ * 12/1/19
+ * 11/27/19
+ * 11/20/19
 */
 package games.BlackJack;
 import java.awt.*;
@@ -14,7 +14,9 @@ import java.util.*;
 public class Deck{
 	private Card[] DeckArray = new Card[52];
 	private int index = 0;
-	//creates a deck
+	/**
+	 * Deck Constructor
+	 */
 	public Deck() {
 		int num = 0;
 		for(int i =0; i<4; i++){
@@ -25,7 +27,9 @@ public class Deck{
 			}
 		}
 	}
-	//shuffles
+	/**
+	 * shuffles the deck
+	 */
 	public void shuffle(){
 		index = 0;
 		int counter=0;
@@ -39,9 +43,17 @@ public class Deck{
 		counter++;
 	}
 	}
+	/**
+	 * checks if there is another card in the deck
+	 * @return
+	 */
 	public boolean hasNextCard(){
 		return index<52;
 	}
+	/**
+	 * returns the next card
+	 * @return
+	 */
 	public Card nextCard(){
 		if(index<52){
 		index++;
@@ -52,6 +64,10 @@ public class Deck{
 		return null;
 		}
 	}
+	/**
+	 * debug to check deck creation and shuffle
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Deck test = new Deck();
 		System.out.println(test.toString());

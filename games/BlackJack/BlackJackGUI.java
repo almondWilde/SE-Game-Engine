@@ -1,12 +1,13 @@
-/*
- Class: BlackJackGUI
- Creates the Blackjack GUI
- @author Ryan Flynn
- Last Edit: 12/2/19
- 12/1/19
- 11/27/19
- 11/20/19
-*/
+/**
+ * Class: BlackJackGUI
+ * Creates the Blackjack GUI
+ * @author Ryan Flynn
+ * Last Edit: 12/2/19
+ * 12/1/19
+ * 11/27/19
+ * 11/20/19
+ */
+
 package games.BlackJack;
 import java.awt.*;
 import java.awt.event.*;
@@ -30,7 +31,9 @@ public class BlackJackGUI extends javax.swing.JFrame {
   private JTextArea playerArea = new JTextArea();
   private JTextArea dealerArea = new JTextArea();
 
-//Creates GUI
+/**
+ * Constructor for the BlackjackGUI. creates a new gui with appropriate buttons, fields and formatting
+ */
   public BlackJackGUI()
   {
 	Color newTableColor = new Color(51,102,0);
@@ -107,64 +110,121 @@ public class BlackJackGUI extends javax.swing.JFrame {
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
   }
-  //sets button action listeners
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setAbout(ActionListener listener) {
 	  aboutButton.addActionListener(listener);
   }
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setHelp(ActionListener listener) {
 	  helpButton.addActionListener(listener);
   }
-  
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setBet(ActionListener listener) {
 	  betButton.addActionListener(listener);
   }
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setPlay(ActionListener listener) {
     playButton.addActionListener(listener);
   }
-
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setHit(ActionListener listener) {
     hitButton.addActionListener(listener);
   }
-
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setDoubleDown(ActionListener listener) {
 	doubleDownButton.addActionListener(listener);  
   }
-  
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setSplit(ActionListener listener) {
 	splitButton.addActionListener(listener);  
   }
   public void setStand(ActionListener listener) {
     standButton.addActionListener(listener);
   }
-  
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void setExit(ActionListener listener) {
 	  exitButton.addActionListener(listener);
   }
-
+  /**
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void displayPlayer(Hand hand) {
     playerArea.setText("Player:\n"+hand.valueOf()+"\n"+hand);
   }
-
+  /** 
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void displayDealer(Hand hand) {
     dealerArea.setText("Dealer:\n"+hand.valueOf()+"\n"+hand);
   }
-
+  /** 
+   * sets button action listeners
+   * 
+   * @param listener
+   */
   public void displayDealerCard(Card card) {
     dealerArea.setText("Dealer Shows:\n"+card);
   }
+  /** 
+   * Displays the outcome of the game as a string
+   * 
+   * @param outcome
+   */
 
   public void displayOutcome(String outcome) {
     playerArea.setText(playerArea.getText()+"\n\n"+outcome);
   }
-  //functions to activate and deactivate certain buttons contextually
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activateHelp() {
 	  helpButton.setEnabled(true);
   }
-  
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activateAbout() {
 	  aboutButton.setEnabled(true);
   }
-  
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activateSplit() {
 	playButton.setEnabled(false);
 	betButton.setEnabled(false);
@@ -174,7 +234,9 @@ public class BlackJackGUI extends javax.swing.JFrame {
 	standButton.setEnabled(true);
 	exitButton.setEnabled(true);
   }
-  
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activateHitDoubleStand() {
     playButton.setEnabled(false);
     betButton.setEnabled(false);
@@ -183,7 +245,9 @@ public class BlackJackGUI extends javax.swing.JFrame {
     standButton.setEnabled(true);
     exitButton.setEnabled(true);
   }
-
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activatePlay() {
     playButton.setEnabled(true);
     betButton.setEnabled(false);
@@ -192,7 +256,9 @@ public class BlackJackGUI extends javax.swing.JFrame {
     standButton.setEnabled(false);
     exitButton.setEnabled(true);
   }
-  
+  /**
+   * functions to activate and deactivate certain buttons contextually
+   */
   public void activateBet() {
 	playButton.setEnabled(false);
 	betButton.setEnabled(true);
@@ -201,7 +267,9 @@ public class BlackJackGUI extends javax.swing.JFrame {
 	standButton.setEnabled(false);
 	exitButton.setEnabled(true); 
   }
-
+  /**
+   * Creates a new GUI
+   */
   static public void main(String[] args) {
     new BlackJackGUI();
   }

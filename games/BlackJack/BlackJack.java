@@ -1,11 +1,11 @@
-/*
- Project: BlackJack
- This program creates a functional Blackjack game for the Epsilon Game Launcher
- @author Ryan Flynn
- Last Edit: 12/2/19
- 12/1/19
- 11/27/19
- 11/20/19
+/**
+ * Project: BlackJack
+ * This program creates a functional Blackjack game for the Epsilon Game Launcher
+ * @author Ryan Flynn
+ * Last Edit: 12/2/19
+ * 12/1/19
+ * 11/27/19
+ * 11/20/19
 */
 
 package games.BlackJack;
@@ -39,19 +39,25 @@ public class BlackJack {
 	GUI.setExit(new Exit());
 	GUI.activateBet();	
 	}
-	//creates functional buttons
-	//displays a box containing information on the game
+
+	/**
+	 * About button
+	 */
 	class About implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(null, "Blackjack Version 1.0" + "\nCreated by: Ryan Flynn" + "\nPart of the Epsilon Game Launcher");
 		}
 	}
-	//displays a box to explain the game to the user
+	/**displays a box to explain the game to the user
+	 */
 	class Help implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(null, "The object of BlackJack is to create a hand that is as close to 21 without going over." + "\nDealer must stand on 17." + "\nBlackJack pays 3:2." + "\nInitial betting money is $1000." + "\nThe minimum bet for this table is $10." + "\nThe maximum bet for this table is $100." + "\nThe program will exit when you have gone bust or select to exit.");
 		}
 	}
+	/**
+	 * handles betting
+	 */
 	class Bet implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			bet = Integer.parseInt(JOptionPane.showInputDialog("You have $" + cash + " Enter Your Bet: "));
@@ -72,7 +78,10 @@ public class BlackJack {
 			GUI.activatePlay();
 		}
 	}
-	//deals a hand after a bet has been entered
+	
+	/**
+	 * deals a hand after a bet has been entered
+	 */
 	class Play implements ActionListener {
 	 public void actionPerformed (ActionEvent e) {
 	 deck = new Deck();
@@ -93,7 +102,9 @@ public class BlackJack {
 	 }
 	 }
 	}
-	//allows user to take another card
+	/**
+	 * gives the user a card and checks if they have busted
+	 */
 	class Hit implements ActionListener { 
 	 public void actionPerformed (ActionEvent e) {
 
@@ -105,7 +116,9 @@ public class BlackJack {
 		 finishGame();}
 	 }
 	}
-	//user takes another card doubles their bet and stands
+	/**
+	 * gives the user another card doubles their bet, check if they have busted and stands
+	 */
 	class DoubleDown implements ActionListener { 
 		 public void actionPerformed (ActionEvent e) {
 			 bet = bet + bet;
@@ -119,7 +132,9 @@ public class BlackJack {
 			 }
 		 }
 	}
-	//splits the current hand into two hands
+	/**
+	 * splits the current hand into two hands
+	 */
 	class Split implements ActionListener {
 		public void actionPerformed (ActionEvent e) {
 			if (player.splittable() == true) {
@@ -132,19 +147,27 @@ public class BlackJack {
 			GUI.displayDealerCard(dealer.getTopCard());
 		}
 	}
+	/** 
+	 * ends the current hand
+	 */
 	class Stand implements ActionListener {
 	public void actionPerformed (ActionEvent e) {	
 		finishGame();
 		}
 	}
-	//returns to the Epsilon Game Launcher
+	/**
+	 * returns to the Epsilon Game Launcher
+	 */
 	class Exit implements ActionListener {
 		public void actionPerformed (ActionEvent e) {
 			JOptionPane.showMessageDialog(null, "You left with $" + cash);
 			GUI.dispose();
 		}
 	}
-	//logic for determining the outcome of a hand
+	/**
+	 * logic for determining the outcome of a hand
+	 * 
+	 */
 	private void finishGame() {
 		if(player.hasBlackJack()) {
 		GUI.displayDealer(dealer);
@@ -205,7 +228,10 @@ public class BlackJack {
 		           cash = bet + cash;
 		           }			 
 		}
-		//exits the game if the user runs out of money
+		/**
+		 * exits the game if the user runs out of money
+		 * 
+		 */
 		if (cash == 0) {
 			JOptionPane.showMessageDialog(null, "You have busted out. Better luck next time");
 			GUI.dispose();

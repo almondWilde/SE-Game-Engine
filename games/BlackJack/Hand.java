@@ -1,11 +1,11 @@
-/*
- Class: Hand
- Creates a hand object
- @author Ryan Flynn
- Last Edit: 12/2/19
- 12/1/19
- 11/27/19
- 11/20/19
+/**
+ * Class: Hand
+ * Creates a hand object
+ * @author Ryan Flynn
+ * Last Edit: 12/2/19
+ * 12/1/19
+ * 11/27/19
+ * 11/20/19
 */
 package games.BlackJack;
 import java.awt.*;
@@ -14,20 +14,37 @@ import java.util.*;
 public class Hand{
 	public int count = 0;
 	private Card[] Hand;
-	
+	/**
+	 * Constructs a new hand with a maximum capacity of 10 cards
+	 */
 	public Hand() {
 		Hand = new Card[10];
 	}
+	/**
+	 * adds a card to the hand and increments the number of cards counted
+	 * @param card
+	 */
 	public void add(Card card){
 		Hand[count++] = card;
 	}
+	/**
+	 * returns the first card in the hand
+	 * @return
+	 */
 	public Card getTopCard(){
 		return Hand[0];
 	}
+	/**
+	 * returns the second card in the hand
+	 * @return
+	 */
 	public Card getBottomCard() {
 		return Hand[1];
 	}
-	//returns the value of a hand
+	/**
+	 * returns the value of a hand
+	 * @return
+	 */
 	public int valueOf(){
 		int sum=0;
 		int rank=0;
@@ -48,22 +65,34 @@ public class Hand{
 		}		
 		return sum;
 	}
-	//check if the value of 2 cards is the same and returns true allowing splitting
+	/**
+	 * check if the value of 2 cards is the same and returns true allowing splitting
+	 * @return
+	 */
 	public boolean splittable() {
 		if (Hand[0].valueOf() == Hand[1].valueOf()) {
 			}
 		return true;
 	}
-	//check if the value of a hand is 21
+	/**
+	 * check if the value of a hand is 21
+	 * @return
+	 */
 	public boolean hasBlackJack(){
 		int total = Hand[0].valueOf() + Hand[1].valueOf();
 		return total ==21;
 	}
-	//check if the hand value is over 21
+	/**
+	 * check if the hand value is over 21
+	 * @return
+	 */
 	public boolean Bust(){
 		return valueOf() > 21;
 	}
-	//returns the hand and value as a string 
+	/**
+	 * returns the hand and value as a string 
+	 * @return 
+	 */
 	public String toString(){
 		String string ="";
 		int count3 = count;
@@ -81,6 +110,10 @@ public class Hand{
 		}
 		return string;
 	}
+	/**
+	 * debug to test hand functionality
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Deck deck = new Deck();
 		deck.shuffle();
