@@ -8,11 +8,9 @@ import java.util.Random;
  *
  * @author axelzaroli
  * Last Edit: 12/1/19
+ * Class contains private GUI members as well as private members needed for game logic
  */
 public class TicTacToe extends JFrame {
-    // botlogic (turn, assignment, and picking spots), returning to launcher
-    //implement hangman or a similar game 
-       
     private JFrame Menu_Frame;                    //welcome screen frame
     private JFrame Setting_Frame;                 //next frame asking if player wants to play against bot or two player   
     private JFrame Board_Frame;                   //game board frame
@@ -34,7 +32,10 @@ public class TicTacToe extends JFrame {
     private boolean Player1_Turn = false;         //represents whether or not player1 has taken turn, default is false 
     private boolean Bot_Mode = false;             //determines whether or not bot needed
     
-    //test constructor
+    /**
+     * Constructor initializes GUI members and creates the Game Board and adds Buttons
+     * MenuScreen () is called
+     */
     public TicTacToe (){
         //create a frame implementing a main menu -> single player (bot), more than one player, return to game launcher, quit, etc. 
         this.Play_Button = new JButton ("Play Tic Tac Toe!"); 
@@ -59,6 +60,11 @@ public class TicTacToe extends JFrame {
                     
         MenuScreen (); 
     }
+    
+    /**
+     * Creates the GUI representing the TicTacToe Main Menu
+     * ActionListeners determine whether the SettingScreen () is called or all GUI is disposed and returning to Launcher
+     */
     public void MenuScreen () {      
         GridLayout B = new GridLayout (1, 2); 
         this.Menu_Frame = new JFrame ();
@@ -70,6 +76,9 @@ public class TicTacToe extends JFrame {
         this.Menu_Frame.add (this.Quit_Button); 
         this.Menu_Frame.setVisible (true);
         
+        /**
+         * ActionListener for "Play Tic Tac Toe" button
+         */
         this.Play_Button.addActionListener (
                 new ActionListener () {
                     public void actionPerformed (ActionEvent e) {
@@ -82,6 +91,9 @@ public class TicTacToe extends JFrame {
                 }
         );
          
+        /**
+         * 
+         */
         this.Quit_Button.addActionListener (
                 new ActionListener () {
                     public void actionPerformed (ActionEvent e){
@@ -98,7 +110,12 @@ public class TicTacToe extends JFrame {
                 }
         );
     }
-     
+    
+    /**
+     * Creates the GUI representing the Setting screen 
+     * ActionListeners added (See ActionListener JavaDoc)
+     * if two players ClearBoard () is called, if single player CoinFlip () and ClearBoard () called
+     */
     public void SettingScreen () {  
         GridLayout B = new GridLayout (1, 3); 
         this.Setting_Frame = new JFrame ();
@@ -111,6 +128,10 @@ public class TicTacToe extends JFrame {
         this.Setting_Frame.add (this.Quit_Button);
         this.Setting_Frame.setVisible (true);
         
+        /**
+         * ActionListener for the "Two Players" button 
+         * If clicked, will initiate two player logic and call ClearBoard ()
+         */
         this.Two_Button.addActionListener (
                 new ActionListener () {
                     public void actionPerformed (ActionEvent e) {
@@ -122,6 +143,10 @@ public class TicTacToe extends JFrame {
                 }
         );
 
+        /**
+         * ActionListener for the "Single Player vs Bot button 
+         * If clicked, will initiate single player logic and call CoinFlip () and ClearBoard ()
+         */
         this.Single_Button.addActionListener (
                 new ActionListener () {
                     public void actionPerformed (ActionEvent e) {
@@ -133,6 +158,10 @@ public class TicTacToe extends JFrame {
                 }
         );
     }
+    
+    /**
+     * Simulates a coin flip and will assign whether the user or computer has the first move 
+     */
     public void CoinFlip () {
 
         Random rand = new Random ();
@@ -152,6 +181,12 @@ public class TicTacToe extends JFrame {
          }
         //ClearBoard ();
     }
+    
+    /**
+     * Creates the GUI for the PlayAgain menu
+     * ActionListeners added (See ActionListener JavaDoc)
+     * @param w -> determines the winner of the game (Player (1/2) or Bot), is passed from ButtonHandler class method 
+     */
     public void PlayAgain (String w)  {
         GridLayout B = new GridLayout (1, 3);        
         this.Again_Frame = new JFrame (); 
@@ -164,6 +199,10 @@ public class TicTacToe extends JFrame {
         this.Again_Frame.setVisible (true); 
        // this.Again_Frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 
+        /**
+         * ActionListener for the "Play Again?" button 
+         * If clicked, will initiate two player logic and call ClearBoard ()
+         */
         this.Again_Button.addActionListener (
                 new ActionListener () {
                             public void actionPerformed (ActionEvent e) {
@@ -174,6 +213,11 @@ public class TicTacToe extends JFrame {
                             }
                         }
         );   
+        
+        /**
+         * ActionListener for "Return to Setting Menu" button 
+         * If clicked, will initiate two player logic and call ClearBoard ()
+         */
         this.Setting_Button.addActionListener (
                 new ActionListener () {
                             public void actionPerformed (ActionEvent e) {
@@ -186,8 +230,11 @@ public class TicTacToe extends JFrame {
                             }
                         }
         );
-        
     }
+    
+    /**
+     * Logic to clear game board and restart a game
+     */
     public void ClearBoard (){
         this.Turn_Number = 0; 
         this.Player1_Turn = false; 
@@ -198,6 +245,13 @@ public class TicTacToe extends JFrame {
             this.Position_Button [i].setText (" "); 
         }     
     }
+    
+    /**
+     * Private class to handle the buttons on the game board and implement game logic
+     * Will check for wins and implement appropriate logic based on if the game is single player or two player 
+     * calls CheckWin (String Player), passing the appropriate Player string to be checked for win 
+     * calls PlayAgain (String w) if a win is returned or the draw logic is true
+     */
     private class ButtonHandler implements ActionListener  {   
         public void actionPerformed (ActionEvent e) {   
             
@@ -269,7 +323,8 @@ public class TicTacToe extends JFrame {
                              }
                         }                         
                     }
-                    else if (e.getSource () == Position_Button [i] && Player.equals ("O") && Player1_Turn == true) {
+                    else if (e.getSource () == Position_Button [i] && 
+                            Player.equals ("O") && Player1_Turn == true) {
                         String current = Position_Button [i].getText (); 
                         String empty = " "; 
                         
@@ -331,8 +386,9 @@ public class TicTacToe extends JFrame {
                     }
                 }
             }
-            if (Turn_Number >= 9 && CheckWin (Player1) == false && CheckWin (Player2) == false && 
-                                            CheckWin (Bot) == false && CheckWin (Player) == false)  {                   
+            if (Turn_Number >= 9 && CheckWin (Player1) == false &&
+                    CheckWin (Player2) == false && 
+                    CheckWin (Bot) == false && CheckWin (Player) == false)  {                   
                 JOptionPane.showMessageDialog (null, "Draw!"); 
                 Board_Frame.setVisible (false);
                 PlayAgain ("Draw!"); 
@@ -340,6 +396,11 @@ public class TicTacToe extends JFrame {
         }
     }
 
+    /**
+     * Will call the other three check functions (vertical, horizontal, diagonal) 
+     * @param Player -> Player string, either bot or player (1/2) containing either "X" or "O"
+     * @return -> return true if one of the three other check functions return true, false otherwise
+     */
     public boolean CheckWin (String Player)  {
       if (CheckVertical (Player) == true) 
           return true; 
@@ -350,6 +411,12 @@ public class TicTacToe extends JFrame {
       else
           return false; 
     }
+    
+    /**
+     * Will check the hard coded vertical win possibilites for tic tac toe
+     * @param Player -> Player string, either bot or player (1/2) containing either "X" or "O"
+     * @return return true if one of the three vertical win possibilities true, false otherwise
+     */
     private boolean CheckVertical (String Player) {
         
         if     (Position_Button [0].getText ().equals (Player) &&
@@ -367,6 +434,12 @@ public class TicTacToe extends JFrame {
        else
             return false;
     }
+    
+    /**
+     * Will check the hard coded horizontal win possibilites for tic tac toe
+     * @param Player -> Player string, either bot or player (1/2) containing either "X" or "O"
+     * @return return true if one of the three horizontal win possibilities true, false otherwise
+     */
     private boolean CheckHorizontal (String Player) {
         if     (Position_Button [0].getText ().equals (Player) &&
                 Position_Button [1].getText ().equals (Player) &&
@@ -383,6 +456,12 @@ public class TicTacToe extends JFrame {
        else
             return false;
     }
+    
+    /**
+     * Will check the hard coded diagonal win possibilites for tic tac toe
+     * @param Player -> Player string, either bot or player (1/2) containing either "X" or "O"
+     * @return return true if one of the two diagonal win possibilities true, false otherwise
+     */
     private boolean CheckDiagonal (String Player) {
         if     (Position_Button [0].getText ().equals (Player) &&
                 Position_Button [4].getText ().equals (Player) &&
@@ -397,17 +476,12 @@ public class TicTacToe extends JFrame {
             return false;
     }
  
-    
+    /**
+     * void main function used for testing tic tac toe GUI and game logic
+     * @param args -> not used
+     */
     public static void main(String[] args) {
         TicTacToe test;
         test = new TicTacToe (); 
     }
 }
-
-/*
-    Tags needed for project 
-    @author axelzaroli 
-    @param parameters passed to functions 
-    @return return variables
-    @except for exceptions
-*/

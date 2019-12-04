@@ -3,18 +3,23 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import java.util.Random;
 
+
 /**
  *
  * @author axelzaroli
+ * The variables of the game are initiated in the constructor 
+ * PlayGame () is called from constructor
  */
 public class Hangman {
     
     private String [] pool;   //a simple wordpool
     private String corpse = ("---\n   |\n   |\n   ");    //represents hangman
-    //boolean playing = true; //purpose is to hide gamelauncher momentarily while game runs on terminal, changed to false when player done
+    boolean playing = true; //purpose is to hide gamelauncher momentarily while game runs on terminal, changed to false when player done
     private JFrame mainWindow;
     public Hangman (JFrame m) {
+        //mainWindow = new JFrame ();
         mainWindow = m;
+        
         mainWindow.setVisible (false);
         
         JOptionPane.showMessageDialog (null, "The Hangman game is ran from terminal and launch menu will be hidden.");
@@ -40,6 +45,12 @@ public class Hangman {
         PlayGame ();
     }
     
+    /**
+     * PlayGame has the logic to the Hangman game
+     * Uses StringBuilder for user input, if correct then letter displayed
+     * if incorrect input, then AddPart () called
+     * Displays found/hangman messages and prompts user to play again and calls PlayAgain () where input is scanned
+     */
     public void PlayGame () {
                 
         clearConsole ();
@@ -97,7 +108,8 @@ public class Hangman {
             if (compare.equals (pool[w]))
                 break;
             
-        }while (!corpse.equals ("---\n   |\n   |\n   O\n+--I--+\n   I\n  / \\ \n_/   \\_") && input != 'q' && input != 'Q');
+        }while (!corpse.equals ("---\n   |\n   |\n   O\n+--I--+\n   I\n  / \\ \n_/   \\_") 
+                && input != 'q' && input != 'Q');
         
         if (input == 'q' || input == 'Q')
             ReturnToLauncher ();
@@ -112,23 +124,34 @@ public class Hangman {
             PlayAgain ();
         }
     }
+    /**
+     * 
+     * @param i -> specifies a part number
+     * A "Body Part" represented through text will be added to the private String corpse that represents the hangman 
+     */
     public void addPart (int i) {
-        if (i == 1)
+        if (i == 1)             //i = 1; head
             corpse += "O";
-        if (i == 2)
+        if (i == 2)             //i = 2; left arm
             corpse += "\n+--";
-        if (i == 3)
+        if (i == 3)             //i = 3; upper torso
             corpse += "I";
-        if (i == 4)
+        if (i == 4)             //i = 4; right arm
             corpse += "--+";
-        if (i == 5)
+        if (i == 5)             //i = 5; lower torso
             corpse += "\n   I";
-        if (i == 6)
+        if (i == 6)             //i = 6; upper legs
             corpse += "\n  / \\ ";
-        if (i == 7)
+        if (i == 7)             //i = 7; lower legs
             corpse += "\n_/   \\_";
     }
     
+    
+    /** 
+     * The user is prompted from PlayGame () and PlayAgain () is where the input is scanned
+     * if 'q' entered, ReturnToLauncher () called
+     * if 'y' entered, PlayAgain () called
+     */
     public void PlayAgain () {
         char c;
         do {
@@ -137,16 +160,23 @@ public class Hangman {
             c = s.charAt (0);
             if (c == 'y' || c == 'Y')
                 PlayGame ();
-            else if (c != 'q' && c != 'Q' && c != 'y' && c != 'Y')
+            else if (c != 'q' && c != 'Q' 
+                    && c != 'y' && c != 'Y')
                 System.out.println ("Enter a valid choice: ");
         }while (c != 'q' && c != 'Q');
     }
     
+    /**
+     * will call ClearConsole and make the GameLauncher mainWindow visible again
+     */
     public void ReturnToLauncher () {
         clearConsole ();
         mainWindow.setVisible (true);
-        return;
+      //  return;
     }
+    /**
+     * code I found that is intended to clear the console of output 
+     */
     public static void clearConsole() {
         System.out.print ("\033[H\033[2J");
         System.out.flush ();

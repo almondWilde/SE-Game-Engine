@@ -1,4 +1,3 @@
-// Author: Derrick Chan
 package games.Bingo;
 import java.awt.Component;
 import java.awt.Container;
@@ -11,11 +10,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * WinGUI class that represents the GUI for the menu that opens when the player wins.
+ * @author Derrick Chan
+ * @version 1.0
+ */
 public class WinGUI extends JPanel
 {
+    /**
+     * Creates a new frame for the GUI components to be added to.
+     * Also creates a BingoGUI object to be used when the play button is clicked.
+     */
     JFrame frame = new JFrame("Winner");
     private static BingoGUI bingo;
     
+    /**
+     * Function that adds the GUI components to the pane.
+     * This function also includes the ActionListeners for all the buttons included into the GUI.
+     * @param pane The pane or window that the components will be added to.
+    */
     public void addComponentsToPane(Container pane)
     {
         JPanel mainPanel = new JPanel();
@@ -55,6 +68,9 @@ public class WinGUI extends JPanel
         buttonPanel.add(btnReturn);
         pane.add(mainPanel);
     }
+    /**
+     * Function to create and show the GUI.
+    */
     public void createAndShowGUI() 
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

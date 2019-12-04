@@ -1,4 +1,3 @@
-// Author: Derrick Chan
 package games.Bingo;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,12 +13,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class BingoGUI extends JPanel
+/** BingoGUI class that represents the GUI for the Bingo board.
+ * @author Derrick Chan
+ * @version 1.0
+ */
+
+public class BingoGUI extends JPanel
 {
+    /**
+     * Creates a new frame for the GUI components to be added to.
+     * Also creates a WinGUI object and LoseGUI object to be used when the win or lose button is clicked.
+     */
     JFrame frame = new JFrame("Bingo");
     private WinGUI win;
     private LoseGUI lose;
-    
+    /**
+     * Function that adds the GUI components to the pane.
+     * This function also includes the ActionListeners for all the buttons included into the GUI.
+     * @param pane The pane or window that the components will be added to.
+     */
     public void addComponentsToPane(Container pane)
     {
         BingoGame bingo = new BingoGame();
@@ -543,7 +555,9 @@ class BingoGUI extends JPanel
         pane.add(btnBingo, BorderLayout.LINE_END);
         pane.add(mainPanel);
     } 
-    
+    /**
+     * Function to create and show the GUI.
+     */
     public void createAndShowGUI() 
     {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
