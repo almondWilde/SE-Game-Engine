@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /**
  * WinGUI class that represents the GUI for the menu that opens when the player wins.
- * @author Derrick
+ * @author Derrick Chan
  * @version 1.0
  */
 public class WinGUI extends JPanel
