@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /**
  * LoseGUI class that represents the GUI for the menu that opens when the player loses.
- * @author Derrick
+ * @author Derrick Chan
  * @version 1.0
  */
 public class LoseGUI extends JPanel
