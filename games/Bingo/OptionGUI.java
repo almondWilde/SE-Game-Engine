@@ -69,5 +69,4 @@ public class OptionGUI extends JPanel
         frame.setVisible(true);
     }
 }
-
 // 25 lines
