@@ -2,7 +2,7 @@ package games.Bingo;
 
 /**
  * BingoGrid Object Class that holds the integer value of the BingoGrid and 2 Boolean values to determine if the grid is called and if it is filled.
- * @author Derrick
+ * @author Derrick Chan
  * @version 1.0
  */
 public class BingoGrid 
