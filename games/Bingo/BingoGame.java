@@ -8,7 +8,7 @@ import java.util.Random;
  * BingoGame class that holds the game's logic.
  * grid is a list of the values which will be added to the GUI.
  * board is an array of BingoGrid objects.
- * @author Derrick
+ * @author Derrick Chan
  * @version 1.0
  */
 
