@@ -4,6 +4,7 @@ package games.Minesweeper;
 /**
  * Class that creates all static variables needed in the java files
  * @author Megan
+ * @version 1.0
  */
 public class Settings
 {

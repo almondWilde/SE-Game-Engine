@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 /**
  * Class that contains time counter
  * @author Megan Rozal
+ * @version 1.0
  */
 public class Counter extends TimerTask
 {

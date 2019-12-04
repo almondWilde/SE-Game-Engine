@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 /**
  * Class that restarts the game and resets the board 
  * @author Megan Rozal
+ * @version 1.0
  */
 public class RestartGame implements ActionListener
 {

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 /**
  * Class that contains the functionalities of the menu bar
  * @author Megan Rozal
+ * @version 1.0
  */
 public class MenuAction implements ActionListener
 {

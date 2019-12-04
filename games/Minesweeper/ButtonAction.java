@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 /** 
  * Implements user's button presses
  * @author Megan Rozal
+ * @version 1.0
  */
 public class ButtonAction implements MouseListener
 {

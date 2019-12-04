@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 /**
  * Grid class represents the GUI for the Minesweeper board
  * @author Megan Rozal
+ * @version 1.0
  */
 
 public class Grid

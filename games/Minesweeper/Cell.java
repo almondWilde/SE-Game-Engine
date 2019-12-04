@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 /**
  * Class that represents the cell functionalities on the GUI board
  * @author Megan Rozal
+ * @version 1.0
  */
 
 public class Cell
