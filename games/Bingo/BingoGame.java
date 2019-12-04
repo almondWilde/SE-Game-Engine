@@ -1,20 +1,30 @@
-// Author: Derrick Chan
 package games.Bingo;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * BingoGame class that holds the game's logic.
+ * grid is a list of the values which will be added to the GUI.
+ * board is an array of BingoGrid objects.
+ * @author Derrick
+ * @version 1.0
+ */
+
 public class BingoGame
 {
-    // Deck will be used for drawing cards, while grid will be used to fill the BingoGUI grid
     List<Integer> deck = new LinkedList<>();
     List<String> grid = new LinkedList<>();
     BingoGrid board[] = new BingoGrid[25];
-
+    /**
+     * Constructor for the BingoGame object.
+     * Creates a deck of cards 1-75 and shuffles them.
+     * Creates a board with 25 cards from the deck.
+     * board[13] is setCalled because it is the "FREE" middle grid.
+     */
     public BingoGame()
     {
-        // Deck of numbers 1-75
         for(int i = 1; i <= 75; i++)
         {
             deck.add(i);
@@ -30,19 +40,27 @@ public class BingoGame
             board[k] = new BingoGrid(gridVal);
             k++;
         }
-        // Free Grid is always set to called
         board[13].setCalled(true);
     }
     
-    String getVal(int index)
+    /**
+     * Gets the value of the board array at the index that is specified.
+     * @param index The index of the array.
+     * @return 
+     */
+    public String getVal(int index)
     {
         String s = Integer.toString(board[index].getValue());
         return s;
     }
-    // Calls a random number from the deck and then removes the number from the deck array
-    int drawNum()
+    
+    /**
+     * Draws a random number from the deck and then removes the number from the deck array.
+     * @return The integer that was drawn from the deck.
+     */
+    public int drawNum()
     {
-        // Chooses a random element from deck, removes it from the deck, and returns it
+        // Chooses a random element from deck, removes it from the deck, and returns it.
         int rand = new Random().nextInt(deck.size());
         int numDrawn = deck.get(rand);
         deck.remove(rand);
@@ -57,12 +75,22 @@ public class BingoGame
         return numDrawn;
     }
     
-    void fillSquare(int index)
+    /**
+     * Calls the setFilled function from BingoGrid onto the index of the board array specified
+     * This function will make the BingoGrid's Boolean value isFilled to true.
+     * @param index 
+     */
+    public void fillSquare(int index)
     {
         board[index].setFilled(true);
     }
     
-    void unfillSquare(int index)
+    /**
+    * Calls the setFilled function from BingoGrid onto the index of the board array specified
+    * This function will make the BingoGrid's Boolean value isFilled to false.
+    * @param index 
+    */
+    public void unfillSquare(int index)
     {
         board[index].setFilled(false);
     }
@@ -82,7 +110,12 @@ public class BingoGame
     // Diagonal
     // 0, 6, 12, 18, 24
     // 4, 8, 12, 16, 20
-    boolean checkBingo()
+    /**
+     * This method is used to check the Bingo win condition. If 5 grids in a row have isFilled == true and isCalled == true, then the result is true, else it is false.
+     * The 5 grids in a row can be found horizontal, vertical, or diagonal.
+     * @return This returns either true, a bingo was found, or false, a bingo was not found.
+     */
+    public boolean checkBingo()
     {
         // Horizontal
         int count = 0;
