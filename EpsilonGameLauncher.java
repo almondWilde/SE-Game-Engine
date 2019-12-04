@@ -27,8 +27,17 @@ import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+/**
+	Creates a window with buttons that will launcher the games:
+	Hangman, TicTacToe, Black Jack, Rock Paper Scissors, Minesweeper,
+	and Bingo
+	@author Armand Wilson
+**/
 public class EpsilonGameLauncher extends JFrame
 {
+	/**
+		GUI Components
+	**/
 	private JMenuBar menuBar;
 	private JMenu NewGame_menu, Quit_menu, Help_menu;
 	private JButton btnTicTacToe,btnBingo,btnHangman,btnBlackJack,btnRockPaperScissors,btnMinsweeper;
@@ -36,9 +45,18 @@ public class EpsilonGameLauncher extends JFrame
 	private Bingo bingoGame;
 	private TicTacToe tttGame;
 	private Hangman hangmanGame;
-
+	/**
+			Panels and frame that can be passed to other classes
+	**/
 	public JPanel pCenter;
 	public JFrame mainWindow;
+
+	/**
+		Constructor for EpsilonGameLauncher. Builds and dispalys a window for game
+		options.
+		@author Armand Wilson
+		@throws IOException
+	**/
 	public EpsilonGameLauncher() throws IOException
 	{
 		//creates the window
@@ -120,11 +138,10 @@ public class EpsilonGameLauncher extends JFrame
 		mainWindow.show();
 	}
 
+	/**
+		Button handler for EpsilonGameLauncher game buttons
+	**/
 	public class aButtonHandler implements ActionListener{
-		// private EpsilonGameLauncher.aButtonHandler parentClass = this;
-		// super.getClass();
-
-		//public void getSuper() { System.out.println( this.parentClass); }
 		public void actionPerformed(ActionEvent e) {
 			// in here is where the code goes in response to the click
 			if(e.getSource() == btnBingo) {		// Bingo Button!
@@ -177,6 +194,9 @@ public class EpsilonGameLauncher extends JFrame
 			}
 		}
 
+		/**
+			EpsilonGameLauncher main class. Creates and runs the launcher
+		**/
 	public static void main(String[] args) throws IOException
 	{
 		EpsilonGameLauncher launcher = new EpsilonGameLauncher();
