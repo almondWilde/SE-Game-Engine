@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 /**
  * OptionGUI class that represents the GUI for the options menu.
- * @author Derrick
+ * @author Derrick Chan
  * @version 1.0
  */
 public class OptionGUI extends JPanel
